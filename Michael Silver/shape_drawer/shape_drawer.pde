@@ -26,25 +26,50 @@ void draw(){//called by processing after setup and then every 100 millis
 }
 
 void mouseClicked(){//called by processing on mouse click
-  if(!userIsDrawingLine){
-    //start line
-    numberOfLines++;
-    //set starting position of last line to current position
-    xStarts[numberOfLines-1] = mouseX;
-    yStarts[numberOfLines-1] = mouseY;
-    userIsDrawingLine = true;
-    mouseMoved();
-  }else{
-    //finish line
-    userIsDrawingLine = false;
+  if (key == 'l' || key == 'L'){
+    if(!userIsDrawingLine){
+      //start line
+      numberOfLines++;
+      //set starting position of last line to current position
+      linexStarts[numberOfLines-1] = mouseX;
+      lineyStarts[numberOfLines-1] = mouseY;
+      userIsDrawingLine = true;
+      mouseMoved();
+    }else{
+      //finish line
+      userIsDrawingLine = false;
+    }
+  }
+  if (key == 'r' || key == 'R'){
+    if(!userIsDrawingRect){
+      //start line
+      numberOfRects++;
+      //set starting position of last line to current position
+      rectxStarts[numberOfLines-1] = mouseX;
+      rectyStarts[numberOfLines-1] = mouseY;
+      userIsDrawingRect = true;
+      mouseMoved();
+    }else{
+      //finish line
+      userIsDrawingLine = false;
+    }
   }
 }
 
 void mouseMoved() {//called by processing every time mouse moves
-  //set ending coordinate of last line to current position while drawing line
-  if(userIsDrawingLine){
-    xEnds[numberOfLines-1] = mouseX;
-    yEnds[numberOfLines-1] = mouseY;
+  if (key == 'l' || key == 'L'){
+    //set ending coordinate of last line to current position while drawing line
+    if(userIsDrawingLine){
+      linexEnds[numberOfLines-1] = mouseX;
+      lineyEnds[numberOfLines-1] = mouseY;
+    }
+  }
+  if (key == 'r' || key == 'R'){
+    //set ending coordinate of last rect to current position while drawing line
+    if(userIsDrawingRect){
+      rectxEnds[numberOfLines-1] = mouseX;
+      rectyEnds[numberOfLines-1] = mouseY;
+    }
   }
 }
 
