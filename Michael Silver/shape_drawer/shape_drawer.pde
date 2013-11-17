@@ -45,13 +45,13 @@ void mouseClicked(){//called by processing on mouse click
       //start line
       numberOfRects++;
       //set starting position of last line to current position
-      rectxStarts[numberOfLines-1] = mouseX;
-      rectyStarts[numberOfLines-1] = mouseY;
+      rectxStarts[numberOfRects-1] = mouseX;
+      rectyStarts[numberOfRects-1] = mouseY;
       userIsDrawingRect = true;
       mouseMoved();
     }else{
       //finish line
-      userIsDrawingLine = false;
+      userIsDrawingRect = false;
     }
   }
 }
@@ -67,8 +67,8 @@ void mouseMoved() {//called by processing every time mouse moves
   if (key == 'r' || key == 'R'){
     //set ending coordinate of last rect to current position while drawing line
     if(userIsDrawingRect){
-      rectxEnds[numberOfLines-1] = mouseX;
-      rectyEnds[numberOfLines-1] = mouseY;
+      rectxEnds[numberOfRects-1] = mouseX;
+      rectyEnds[numberOfRects-1] = mouseY;
     }
   }
 }
@@ -78,8 +78,15 @@ void keyPressed(){
     for(int i=0; i<numberOfLines; i++){
       line(linexStarts[i], lineyStarts[i], linexEnds[i], lineyEnds[i]);
     }
+    for(int i=0; i<numberOfRects; i++){
+      rectMode(CORNERS);
+      rect(rectxStarts[i], rectyStarts[i], rectxEnds[i], rectyEnds[i]);
+    }
   }
   if (key == 'r' || key == 'R'){
+    for(int i=0; i<numberOfLines; i++){
+      line(linexStarts[i], lineyStarts[i], linexEnds[i], lineyEnds[i]);
+    }
     for(int i=0; i<numberOfRects; i++){
       rectMode(CORNERS);
       rect(rectxStarts[i], rectyStarts[i], rectxEnds[i], rectyEnds[i]);
