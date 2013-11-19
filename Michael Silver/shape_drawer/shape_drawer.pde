@@ -1,12 +1,11 @@
 float[] shapexStarts,shapeyStarts,shapexEnds,shapeyEnds;
 int numberOfShapes;
-int MAX = 2000;
+int MAX = 20000;
 boolean userIsDrawingShape = false;
 int drawingMode;
 int SHAPE_TYPE_LINE = 1;
 int SHAPE_TYPE_RECT = 2;
 int shapesTypes[];
-//Shapes shape, rectangle;
 
 void setup(){//called by processing on setup
   size(640,640);
@@ -16,9 +15,10 @@ void setup(){//called by processing on setup
   shapexEnds = new float[MAX];
   shapeyEnds = new float[MAX];
   shapesTypes = new int[MAX];
-  
   drawingMode = SHAPE_TYPE_LINE;
-  //new Class Shapes (x
+  
+  println ("press l to draw line");
+  println ("press r to draw rectangle");
 }
 
 void draw(){//called by processing after setup and then every 100 millis
@@ -29,6 +29,7 @@ void draw(){//called by processing after setup and then every 100 millis
      }
      if (shapesTypes[i] == SHAPE_TYPE_RECT){
        rectMode(CORNERS);
+       fill(255,255,255,0);
        rect(shapexStarts[i], shapeyStarts[i], shapexEnds[i], shapeyEnds[i]);
      }
   }
