@@ -24,24 +24,31 @@ class Shape {
   }
   void getData() {
     if (!userIsDrawingShape){
+      println("Start draw");
       //start shape
       numberOfShapes++;
       //set starting position of last shape to current position
       shapexStarts[numberOfShapes-1] = mouseX;
       shapeyStarts[numberOfShapes-1] = mouseY;
-    }
-    userIsDrawingShape = !userIsDrawingShape;
-    while (userIsDrawingShape) {
       shapexEnds[numberOfShapes-1] = mouseX;
       shapeyEnds[numberOfShapes-1] = mouseY;
     }
-    println("I've stopped drawing");
+    
+    userIsDrawingShape = !userIsDrawingShape;
+  }
+  
+  void setShapeEndData() {
+    if (numberOfShapes > 0 && userIsDrawingShape) {
+      shapexEnds[numberOfShapes-1] = mouseX;
+      shapeyEnds[numberOfShapes-1] = mouseY;
     }
-    void drawLine() {
-      for(int i=0; i<numberOfShapes; i++){
-        line(shapexStarts[i], shapeyStarts[i], shapexEnds[i], shapeyEnds[i]);
-      }
+  } 
+  
+  void drawLine() {
+    for(int i=0; i<numberOfShapes; i++){
+      line(shapexStarts[i], shapeyStarts[i], shapexEnds[i], shapeyEnds[i]);
     }
+  }
 
   void drawRect() {
     for(int i=0; i<numberOfShapes; i++){
@@ -65,5 +72,9 @@ void mouseClicked() {//called by processing on mouse click
     //save values to rectShape
     rectShape.getData();
   }
-  println("I've been clicked");
+}
+
+void mouseMoved() {
+   lineShape.setShapeEndData();
+   rectShape.setShapeEndData();
 }
