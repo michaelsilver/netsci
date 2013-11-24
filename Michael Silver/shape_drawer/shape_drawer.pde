@@ -22,6 +22,32 @@ class Shape {
   Shape(int tempNumberOfShapes) {
     numberOfShapes = tempNumberOfShapes;
   }
+  void drawLine() {
+    for(int i=0; i<numberOfShapes; i++){
+      line(shapexStarts[i], shapeyStarts[i], shapexEnds[i], shapeyEnds[i]);
+    }
+  }
+
+  void drawRect() {
+    for(int i=0; i<numberOfShapes; i++){
+      rectMode(CORNERS);
+      rect(shapexStarts[i], shapeyStarts[i], shapexEnds[i], shapeyEnds[i]);
+    }
+  }
+  void getData() {
+    if (!userIsDrawingShape){
+      //start shape
+      numberOfShapes++;
+      //set starting position of last shape to current position
+      shapexStarts[numberOfShapes-1] = mouseX;
+      shapeyStarts[numberOfShapes-1] = mouseY;
+      userIsDrawingShape = true;
+      
+    } else {
+      //finish shape
+      userIsDrawingShape = false;
+    }
+  }
 }
 
 void draw() {//called by processing after setup and then every 100 millis
@@ -29,7 +55,8 @@ void draw() {//called by processing after setup and then every 100 millis
   lineShape.drawLine();
   rectShape.drawRect();
 }
-
+void keyPressed() {
+  userKey
 void mouseClicked() {//called by processing on mouse click
   if (keyPressed) {
     if (key == 'l' || key == 'L') {
@@ -42,38 +69,8 @@ void mouseClicked() {//called by processing on mouse click
   }
 }
 
-void getData() {
-  if (!userIsDrawingShape){
-    //start shape
-    numberOfShapes++;
-    //set starting position of last shape to current position
-    shapexStarts[numberOfShapes-1] = mouseX;
-    shapeyStarts[numberOfShapes-1] = mouseY;
-    userIsDrawingShape = true;
-    mouseMoved();
-  } else{
-    //finish shape
-    userIsDrawingShape = false;
-  }
-}  
-
-void mouseMoved() {//called by processing every time mouse moves
-  //set ending coordinate of last shape to current position while drawing shape
+void mouseMoved() {
   if(userIsDrawingShape){
     shapexEnds[numberOfShapes-1] = mouseX;
     shapeyEnds[numberOfShapes-1] = mouseY;
   }
-}
-
-void drawLine() {
-  for(int i=0; i<numberOfShapes; i++){
-    line(shapexStarts[i], shapeyStarts[i], shapexEnds[i], shapeyEnds[i]);
-  }
-}
-
-void drawRect() {
-  for(int i=0; i<numberOfShapes; i++){
-    rectMode(CORNERS);
-    rect(shapexStarts[i], shapeyStarts[i], shapexEnds[i], shapeyEnds[i]);
-  }
-}
