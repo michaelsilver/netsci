@@ -22,18 +22,6 @@ class Shape {
   Shape(int tempNumberOfShapes) {
     numberOfShapes = tempNumberOfShapes;
   }
-  void drawLine() {
-    for(int i=0; i<numberOfShapes; i++){
-      line(shapexStarts[i], shapeyStarts[i], shapexEnds[i], shapeyEnds[i]);
-    }
-  }
-
-  void drawRect() {
-    for(int i=0; i<numberOfShapes; i++){
-      rectMode(CORNERS);
-      rect(shapexStarts[i], shapeyStarts[i], shapexEnds[i], shapeyEnds[i]);
-    }
-  }
   void getData() {
     if (!userIsDrawingShape){
       //start shape
@@ -41,11 +29,24 @@ class Shape {
       //set starting position of last shape to current position
       shapexStarts[numberOfShapes-1] = mouseX;
       shapeyStarts[numberOfShapes-1] = mouseY;
-      userIsDrawingShape = true;
-      
-    } else {
-      //finish shape
-      userIsDrawingShape = false;
+    }
+    userIsDrawingShape = !userIsDrawingShape;
+    while (userIsDrawingShape) {
+      shapexEnds[numberOfShapes-1] = mouseX;
+      shapeyEnds[numberOfShapes-1] = mouseY;
+    }
+    println("I've stopped drawing");
+    }
+    void drawLine() {
+      for(int i=0; i<numberOfShapes; i++){
+        line(shapexStarts[i], shapeyStarts[i], shapexEnds[i], shapeyEnds[i]);
+      }
+    }
+
+  void drawRect() {
+    for(int i=0; i<numberOfShapes; i++){
+      rectMode(CORNERS);
+      rect(shapexStarts[i], shapeyStarts[i], shapexEnds[i], shapeyEnds[i]);
     }
   }
 }
@@ -55,22 +56,14 @@ void draw() {//called by processing after setup and then every 100 millis
   lineShape.drawLine();
   rectShape.drawRect();
 }
-void keyPressed() {
-  userKey
-void mouseClicked() {//called by processing on mouse click
-  if (keyPressed) {
-    if (key == 'l' || key == 'L') {
-      //save values to lineShape
-      lineShape.getData();
-    } else if (key == 'r' || key == 'R') {
-      //save values to rectShape
-      rectShape.getData();
-    }
-  }
-}
 
-void mouseMoved() {
-  if(userIsDrawingShape){
-    shapexEnds[numberOfShapes-1] = mouseX;
-    shapeyEnds[numberOfShapes-1] = mouseY;
+void mouseClicked() {//called by processing on mouse click
+  if (key == 'l' || key == 'L') {
+    //save values to lineShape
+    lineShape.getData();
+  } else if (key == 'r' || key == 'R') {
+    //save values to rectShape
+    rectShape.getData();
   }
+  println("I've been clicked");
+}
