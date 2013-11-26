@@ -32,8 +32,7 @@ class Shape {
       shapeyStarts[numberOfShapes-1] = mouseY;
       shapexEnds[numberOfShapes-1] = mouseX;
       shapeyEnds[numberOfShapes-1] = mouseY;
-    }
-    
+    }   
     userIsDrawingShape = !userIsDrawingShape;
   }
   
@@ -75,6 +74,11 @@ void mouseClicked() {//called by processing on mouse click
 }
 
 void mouseMoved() {
-   lineShape.setShapeEndData();
-   rectShape.setShapeEndData();
+  if (key == 'l' || key == 'L') {
+    //save values to lineShape
+    lineShape.setShapeEndData();
+  } else if (key == 'r' || key == 'R') {
+    //save values to rectShape
+    rectShape.setShapeEndData();
+  }
 }
