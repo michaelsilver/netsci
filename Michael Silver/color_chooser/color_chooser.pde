@@ -46,6 +46,15 @@ class Object {
       point (x, y);
     } 
   }
+  
+  void lineClicked() {
+    if (mouseX>=286) {
+      clicked = true;
+      y = mouseY;
+    } else {
+      clicked = false;
+    }
+  }
 }
     
 void draw() {
@@ -58,5 +67,6 @@ void draw() {
 
 void mouseClicked () {
   lineObject.boxClicked();
+  boxObject.lineClicked();
 }
   
