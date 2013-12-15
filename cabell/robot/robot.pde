@@ -1,32 +1,32 @@
 size(800, 600);
 
-int midx = width/2;
-// int legseparation
-
-int startx = 300;
-int starty = 50;
+int mid = width/2;
+int top = 50;
 
 int headwidth = 200;
 int headheight = 100;
 
-int neckwidth = 40;
-int neckheight = 60;
-int necky = starty+headheight;
+float neckwidth = headwidth * 0.2;
+float neckheight = headheight * 0.6;
 
+float legwidth = 0.24 * headwidth;
+float legheight = headheight * 1.5;
 
-int legwidth = 48;
-int legheight = 150;
+float armwidth = 0.3 * headwidth;
+float armheight = headheight * 1.6;
 
-int armwidth = 60;
-int armheight = 160;
+float bodywidth = headwidth * 1.2;
+int bodyheight = headheight * 2;
 
-int bodywidth = 240;
-int bodyheight = 200;
+rect(mid-headwidth/2, top, headwidth, headheight); //head
+rect(mid-neckwidth/2, top+headheight, neckwidth, neckheight); //neck
+rect(mid-bodywidth/2, top+headheight+neckheight, bodywidth, bodyheight); //body
+rect(mid-legwidth/2-legwidth, top+headheight+neckheight+bodyheight, legwidth, legheight); //leftleg
+rect(mid+legwidth/2, top+headheight+neckheight+bodyheight, legwidth, legheight); //rightleg
+rect(mid-bodywidth/2-armwidth, top+headheight+neckheight, armwidth, armheight); //leftarm
+rect(mid+bodywidth/2, top+headheight+neckheight, armwidth, armheight); //rightarm
 
-rect(midx-headwidth/2, starty, headwidth, headheight); //head
-rect (midx-neckwidth/2, necky, neckwidth, neckheight); //neck
-rect (midx-bodywidth/2, starty+160, bodywidth, bodyheight); //body
-rect (startx+28, starty+360, legwidth, legheight); //leftleg
-rect (startx+124, starty+360, legwidth, legheight); //rightleg
-rect (startx-80, starty+160, armwidth, armheight); //leftarm
-rect (startx+220, starty+160, armwidth, armheight); //rightarm
+/* TODO
+Add eyes, have them follow mouse
+Jump when clicked
+Add various other actions activated by keypresses, such as smile, fire laser, etc
