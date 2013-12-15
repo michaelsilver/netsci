@@ -29,4 +29,4 @@ rect(mid+bodywidth/2, top+headheight+neckheight, armwidth, armheight); //rightar
 /* TODO
 Add eyes, have them follow mouse
 Jump when clicked
-Add various other actions activated by keypresses, such as smile, fire laser, etc
+Add various other actions activated by keypresses, such as smile, fire laser, etc */
