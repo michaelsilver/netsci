@@ -3,7 +3,7 @@ Shape lineShape, rectShape, circleShape;
 Draw freeDraw, easingDraw;
 
 void setup() {//called by processing on setup
-  size(640,640);
+  size(1300,1000);
   smooth();
   lineShape = new Shape();
   rectShape = new Shape();
@@ -25,7 +25,7 @@ class Createable {
   float[] yEnds = new float[MAX];
 }
 
-class Shape extends Createable{
+class Shape extends Createable {
   int numberOfShapes = 0;
   
   void getData() {
@@ -40,14 +40,14 @@ class Shape extends Createable{
     }   
     userIsDrawing = !userIsDrawing;
   }
-  
+
   void setShapeEndData() {
-    if (numberOfShapes > 0 && userIsDrawing) {
+    if (userIsDrawing) {
       xEnds[numberOfShapes-1] = mouseX;
       yEnds[numberOfShapes-1] = mouseY;
     }
-  } 
-  
+  }
+
   void drawLine() {
     for(int i=0; i<numberOfShapes; i++) {
       line(xStarts[i], yStarts[i], xEnds[i], yEnds[i]);
@@ -87,9 +87,8 @@ class Draw extends Createable {
   }
   
   void drawContinuously() {
-    for(int i=0; i<numberOfFrames; i++) {
+    for(int i=0; i<numberOfFrames; i++) { 
       line(xStarts[i], yStarts[i], xEnds[i], yEnds[i]);
-      //point(xStarts[i], yStarts[i]);
     }
   }
 }
