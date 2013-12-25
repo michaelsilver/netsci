@@ -26,8 +26,6 @@ public class Main extends PApplet {
 		println("press r to draw rectangle");
 		println("press c for circle");
 		println("press d for freeDraw");
-		println("ScreenWidth: " + GetScreenWorkingWidth());
-		println("ScreenHeight: " + GetScreenWorkingHeight());
 	}
 
 	public static void main(String[] args) {
@@ -57,12 +55,12 @@ public class Main extends PApplet {
 	public void mouseClicked() {// called by processing on mouse click
 		if (key == 'l' || key == 'L') {
 			// save values to lineShape
-			lineShape.setShapeStartData();
+			lineShape.getData();
 		} else if (key == 'r' || key == 'R') {
 			// save values to rectShape
-			rectShape.setShapeStartData();
+			rectShape.getData();
 		} else if (key == 'c' || key == 'C') {
-			circleShape.setShapeStartData();
+			circleShape.getData();
 		} else if (key == 'd' || key == 'D') {
 			freeDraw.getData();
 		}
@@ -97,7 +95,7 @@ public class Main extends PApplet {
 	class Shape extends Createable {
 		int numberOfShapes = 0;
 
-		void setShapeStartData() {
+		void getData() {
 			if (!haveSetShapeStartData) {
 				// start shape
 				numberOfShapes++;
@@ -118,9 +116,9 @@ public class Main extends PApplet {
 		}
 
 		void drawLine() {
-			for (int i = 0; i < numberOfShapes; i++) {
-				if (xStarts[i] != 0 && yStarts[i] != 0 && xEnds[i] != 0
-						&& yEnds[i] != 0) {
+			for (int i = 0; i < numberOfShapes; i++) { //null used in this way?
+				if (xStarts[i] != null && yStarts[i] != null
+						&& xEnds[i] != null && yEnds[i] != null) {
 					line(xStarts[i], yStarts[i], xEnds[i], yEnds[i]);
 				}
 			}
@@ -129,10 +127,7 @@ public class Main extends PApplet {
 		void drawRect() {
 			for (int i = 0; i < numberOfShapes; i++) {
 				rectMode(CORNERS);
-				if (xStarts[i] != 0 && yStarts[i] != 0 && xEnds[i] != 0
-						&& yEnds[i] != 0) {
-					rect(xStarts[i], yStarts[i], xEnds[i], yEnds[i]);
-				}
+				rect(xStarts[i], yStarts[i], xEnds[i], yEnds[i]);
 			}
 		}
 
@@ -141,11 +136,7 @@ public class Main extends PApplet {
 				float[] radius = new float[MAX];
 				radius[i] = sqrt(sq(xStarts[i] - xEnds[i])
 						+ sq(yStarts[i] - yEnds[i]));
-				if (xStarts[i] != 0 && yStarts[i] != 0 && xEnds[i] != 0
-						&& yEnds[i] != 0) {
-					ellipse(xStarts[i], yStarts[i], 2 * radius[i],
-							2 * radius[i]);
-				}
+				ellipse(xStarts[i], yStarts[i], 2 * radius[i], 2 * radius[i]);
 			}
 		}
 	}
