@@ -4,8 +4,9 @@ import processing.core.PApplet;
 
 public class Main extends PApplet {
 	int MAX = 10000;
-	Shape lineShape, rectShape, circleShape;
-	Draw freeDraw, easingDraw;
+	Createable lineShape, rectShape, circleShape;
+	Draw freeDraw;
+	// Draw freeDraw, easingDraw;
 
 	/**
 	 * 
@@ -16,11 +17,12 @@ public class Main extends PApplet {
 	public void setup() {
 		size(GetScreenWorkingWidth(), GetScreenWorkingHeight());
 		smooth();
-		lineShape = new Shape();
-		rectShape = new Shape();
-		circleShape = new Shape();
+		lineShape = new Createable();
+		rectShape = new Createable();
+		circleShape = new Createable();
 		freeDraw = new Draw();
-		easingDraw = new Draw();
+		// freeDraw = new Draw();
+		// easingDraw = new Draw();
 
 		println("press l to draw line");
 		println("press r to draw rectangle");
@@ -51,7 +53,7 @@ public class Main extends PApplet {
 		lineShape.drawLine();
 		rectShape.drawRect();
 		circleShape.drawCircle();
-		freeDraw.drawContinuously();
+		freeDraw.drawLine();
 	}
 
 	public void mouseClicked() {// called by processing on mouse click
@@ -64,7 +66,7 @@ public class Main extends PApplet {
 		} else if (key == 'c' || key == 'C') {
 			circleShape.setShapeStartData();
 		} else if (key == 'd' || key == 'D') {
-			freeDraw.getData();
+			freeDraw.setDrawStartData();
 		}
 	}
 
@@ -78,24 +80,18 @@ public class Main extends PApplet {
 		} else if (key == 'c' || key == 'C') {
 			circleShape.setShapeEndData();
 		} else if (key == 'd' || key == 'D') {
-			// freeDraw.getData();
+			freeDraw.setFreeDrawEndData();
 		}
 	}
 
 	class Createable {
 		boolean haveSetShapeStartData = false;
+		int numberOfShapes = 0;
 
 		float[] xStarts = new float[MAX];
 		float[] yStarts = new float[MAX];
 		float[] xEnds = new float[MAX];
 		float[] yEnds = new float[MAX];
-
-		// List<Integer> ints = new ArrayList<Integer>;
-
-	}
-
-	class Shape extends Createable {
-		int numberOfShapes = 0;
 
 		void setShapeStartData() {
 			if (!haveSetShapeStartData) {
@@ -104,8 +100,6 @@ public class Main extends PApplet {
 				// set starting position of last shape to current position
 				xStarts[numberOfShapes - 1] = mouseX;
 				yStarts[numberOfShapes - 1] = mouseY;
-				// xEnds[numberOfShapes - 1] = mouseX;
-				// yEnds[numberOfShapes - 1] = mouseY;
 			}
 			haveSetShapeStartData = !haveSetShapeStartData;
 		}
@@ -117,10 +111,38 @@ public class Main extends PApplet {
 			}
 		}
 
+		// save comment below! - just in case
+		/*
+		 * boolean haveData(float dataPoint1, float dataPoint2, float
+		 * dataPoint3, float dataPoint4) { if (dataPoint1 != 0 && dataPoint2 !=
+		 * 0 && dataPoint3 != 0 && dataPoint4 != 0) { return true; } else {
+		 * return false; } }
+		 */
+		boolean haveData(float[] dataPoint, int arrayLength) { // I want to add
+																// this to the
+																// library
+			int j = 0;
+			for (int i = 0; i < arrayLength; i++) {
+				if (dataPoint[i] != 0) {
+					j++;
+				}
+			}
+			if (j == arrayLength) {
+				return true;
+			} else {
+				return false;
+			}
+		}
+
+		void circle(float x, float y, float radius) { // I want to add this to
+														// the library
+			ellipse(x, y, 2 * radius, 2 * radius);
+		}
+
 		void drawLine() {
 			for (int i = 0; i < numberOfShapes; i++) {
-				if (xStarts[i] != 0 && yStarts[i] != 0 && xEnds[i] != 0
-						&& yEnds[i] != 0) {
+				float[] temp = { xStarts[i], yStarts[i], xEnds[i], yEnds[i] };
+				if (haveData(temp, 4)) {
 					line(xStarts[i], yStarts[i], xEnds[i], yEnds[i]);
 				}
 			}
@@ -129,8 +151,8 @@ public class Main extends PApplet {
 		void drawRect() {
 			for (int i = 0; i < numberOfShapes; i++) {
 				rectMode(CORNERS);
-				if (xStarts[i] != 0 && yStarts[i] != 0 && xEnds[i] != 0
-						&& yEnds[i] != 0) {
+				float[] temp = { xStarts[i], yStarts[i], xEnds[i], yEnds[i] };
+				if (haveData(temp, 4)) {
 					rect(xStarts[i], yStarts[i], xEnds[i], yEnds[i]);
 				}
 			}
@@ -139,56 +161,33 @@ public class Main extends PApplet {
 		void drawCircle() {
 			for (int i = 0; i < numberOfShapes; i++) {
 				float[] radius = new float[MAX];
-				radius[i] = sqrt(sq(xStarts[i] - xEnds[i])
-						+ sq(yStarts[i] - yEnds[i]));
-				if (xStarts[i] != 0 && yStarts[i] != 0 && xEnds[i] != 0
-						&& yEnds[i] != 0) {
-					ellipse(xStarts[i], yStarts[i], 2 * radius[i],
-							2 * radius[i]);
+				radius[i] = dist(xStarts[i], yStarts[i], xEnds[i], yEnds[i]);
+				float[] temp = { xStarts[i], yStarts[i], xEnds[i], yEnds[i] };
+				if (haveData(temp, 4)) {
+					circle(xStarts[i], yStarts[i], radius[i]);
 				}
 			}
 		}
 	}
 
 	class Draw extends Createable {
-		int numberOfFrames = 0;
-		boolean haveSetShapeStartData = false;
+		boolean penDown = false;
 
-		void getData() {
-			haveSetShapeStartData = !haveSetShapeStartData;
+		void setDrawStartData() {
+			penDown = !penDown;
 
-			while (haveSetShapeStartData) {
-				println("numberOfFrames: " + numberOfFrames);
-
-				if (!haveSetShapeStartData) {
-					numberOfFrames++;
-					xStarts[numberOfFrames - 1] = mouseX;
-					yStarts[numberOfFrames - 1] = mouseY;
-					// haveSetShapeStartData = true;
-				} else {
-					xEnds[numberOfFrames - 1] = mouseX;
-					yEnds[numberOfFrames - 1] = mouseY;
-					// haveSetShapeStartData = false;s
-				}
-				haveSetShapeStartData = !haveSetShapeStartData;
+			if (penDown) {
+				numberOfShapes++;
+				xStarts[numberOfShapes - 1] = mouseX;
+				yStarts[numberOfShapes - 1] = mouseY;
 			}
-			/*
-			 * if (!haveSetShapeStartData && haveSetShapeStartData) {
-			 * numberOfFrames--; }
-			 */
-
-			/*
-			 * if (numberOfFrames == 1) { xStarts[numberOfFrames - 1] = mouseX;
-			 * yStarts[numberOfFrames - 1] = mouseY; } else {
-			 * xStarts[numberOfFrames - 1] = xEnds[numberOfFrames - 2] = mouseX;
-			 * yStarts[numberOfFrames - 1] = yEnds[numberOfFrames - 2] = mouseY;
-			 * }
-			 */
 		}
 
-		void drawContinuously() {
-			for (int i = 0; i < numberOfFrames; i++) {
-				line(xStarts[i], yStarts[i], xEnds[i], yEnds[i]);
+		void setFreeDrawEndData() {
+			if (penDown) {
+				xEnds[numberOfShapes - 1] = xStarts[numberOfShapes] = mouseX;
+				yEnds[numberOfShapes - 1] = yStarts[numberOfShapes] = mouseY;
+				numberOfShapes++;
 			}
 		}
 	}
