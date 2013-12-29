@@ -4,8 +4,7 @@ import processing.core.PApplet;
 
 public class Main extends PApplet {
 	int MAX = 10000;
-	Createable pointShape, lineShape, rectShape, squareShape, ellipseShape,
-			circleShape;
+	Createable lineShape, rectShape, circleShape;
 	Draw freeDraw, easingDraw;
 	// Draw freeDraw, easingDraw;
 
@@ -17,11 +16,9 @@ public class Main extends PApplet {
 	@Override
 	public void setup() {
 		size(GetScreenWorkingWidth(), GetScreenWorkingHeight());
-		pointShape = new Createable();
+		smooth();
 		lineShape = new Createable();
 		rectShape = new Createable();
-		squareShape = new Createable();
-		ellipseShape = new Createable();
 		circleShape = new Createable();
 		freeDraw = new Draw();
 		easingDraw = new Draw();
@@ -51,33 +48,20 @@ public class Main extends PApplet {
 	public void draw() {// called by processing after setup and then every 100
 						// millis
 		background(255, 255, 255);
-		smooth();
 		noFill();
-		pointShape.drawPoint();
 		lineShape.drawLine();
 		rectShape.drawRect();
-		squareShape.drawSquare();
-		ellipseShape.drawEllipse();
 		circleShape.drawCircle();
 		freeDraw.drawLine();
-		easingDraw.drawLine();
 	}
 
 	public void mouseClicked() {// called by processing on mouse click
-		if (key == 'p' || key == 'P') {
-			pointShape.setPointData();
-		} else if (key == 'l' || key == 'L') {
+		if (key == 'l' || key == 'L') {
 			// save values to lineShape
 			lineShape.setShapeStartData();
 		} else if (key == 'r' || key == 'R') {
 			// save values to rectShape
 			rectShape.setShapeStartData();
-		} else if (key == 's' || key == 'S') {
-			// save values to rectShape
-			squareShape.setShapeStartData();
-		} else if (key == 'o' || key == 'O') { // note O is for ellipse
-			// save values to rectShape
-			ellipseShape.setShapeStartData();
 		} else if (key == 'c' || key == 'C') {
 			circleShape.setShapeStartData();
 		} else if (key == 'd' || key == 'D') {
@@ -94,12 +78,6 @@ public class Main extends PApplet {
 		} else if (key == 'r' || key == 'R') {
 			// save values to rectShape
 			rectShape.setShapeEndData();
-		} else if (key == 's' || key == 'S') {
-			// save values to rectShape
-			squareShape.setShapeEndData();
-		} else if (key == 'o' || key == 'O') { // note O is for ellipse
-			// save values to rectShape
-			ellipseShape.setShapeEndData();
 		} else if (key == 'c' || key == 'C') {
 			circleShape.setShapeEndData();
 		} else if (key == 'd' || key == 'D') {
@@ -136,12 +114,6 @@ public class Main extends PApplet {
 			}
 		}
 
-		void setPointData() {
-			numberOfShapes++;
-			xStarts[numberOfShapes - 1] = mouseX;
-			yStarts[numberOfShapes - 1] = mouseY;
-		}
-
 		// save comment below! - just in case
 		/*
 		 * boolean haveData(float dataPoint1, float dataPoint2, float
@@ -170,12 +142,6 @@ public class Main extends PApplet {
 			ellipse(x, y, 2 * radius, 2 * radius);
 		}
 
-		void drawPoint() {
-			for (int i = 0; i < numberOfShapes; i++) {
-				point(xStarts[i], yStarts[i]);
-			}
-		}
-
 		void drawLine() {
 			for (int i = 0; i < numberOfShapes; i++) {
 				float[] temp = { xStarts[i], yStarts[i], xEnds[i], yEnds[i] };
@@ -195,63 +161,12 @@ public class Main extends PApplet {
 			}
 		}
 
-		void drawSquare() {
-			for (int i = 0; i < numberOfShapes; i++) {
-				rectMode(CORNERS);
-				float[] side = new float[MAX];
-				float[] temp = { xStarts[i], yStarts[i], xEnds[i], yEnds[i] };
-				if (haveData(temp, 4)) {
-					if (abs(xEnds[i] - xStarts[i]) >= abs(yEnds[i] - yStarts[i])) {
-						if (xEnds[i] >= xStarts[i]) {
-							side[i] = xEnds[i] - xStarts[i];
-						} else {
-							side[i] = xStarts[i] - xEnds[i];
-						}
-						yEnds[i] = yStarts[i] + side[i];
-					} else {
-						if (yEnds[i] >= yStarts[i]) {
-							side[i] = yEnds[i] - yStarts[i];
-						} else {
-							side[i] = yStarts[i] - yEnds[i];
-						}
-						xEnds[i] = xStarts[i] + side[i];
-					}
-					rect(xStarts[i], yStarts[i], xEnds[i], yEnds[i]);
-				}
-			}
-		}
-
-		void drawEllipse() {
-			boolean wantAssistingRectangle = true; // to be determined by a menu
-													// item
-			float xRectStart, yRectStart, rectWidth, rectHeight;
-			for (int i = 0; i < numberOfShapes; i++) {
-				float[] ellipseWidth = new float[MAX];
-				float[] ellipseHeight = new float[MAX];
-				float[] temp = { xStarts[i], yStarts[i], xEnds[i], yEnds[i] };
-				if (haveData(temp, 4)) {
-					ellipseWidth[i] = 2 * abs(xEnds[i] - xStarts[i]);
-					ellipseHeight[i] = 2 * abs(yEnds[i] - yStarts[i]);
-					ellipse(xStarts[i], yStarts[i], ellipseWidth[i],
-							ellipseHeight[i]);
-				}
-				if (haveSetShapeStartData && wantAssistingRectangle) {
-					rectMode(CENTER);
-					xRectStart = xStarts[numberOfShapes - 1];
-					yRectStart = yStarts[numberOfShapes - 1];
-					rectWidth = ellipseWidth[numberOfShapes - 1];
-					rectHeight = ellipseHeight[numberOfShapes - 1];
-					rect(xRectStart, yRectStart, rectWidth, rectHeight);
-				}
-			}
-		}
-
 		void drawCircle() {
 			for (int i = 0; i < numberOfShapes; i++) {
 				float[] radius = new float[MAX];
+				radius[i] = dist(xStarts[i], yStarts[i], xEnds[i], yEnds[i]);
 				float[] temp = { xStarts[i], yStarts[i], xEnds[i], yEnds[i] };
 				if (haveData(temp, 4)) {
-					radius[i] = dist(xStarts[i], yStarts[i], xEnds[i], yEnds[i]);
 					circle(xStarts[i], yStarts[i], radius[i]);
 				}
 			}
@@ -260,7 +175,7 @@ public class Main extends PApplet {
 
 	class Draw extends Createable {
 		boolean penDown = false;
-		float easing = 0.5f; // to be determined by a menu item
+		float easing = 0.5f;
 
 		void setDrawStartData() {
 			penDown = !penDown;
