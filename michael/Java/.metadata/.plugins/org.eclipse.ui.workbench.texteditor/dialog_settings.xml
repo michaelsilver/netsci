@@ -13,14 +13,21 @@
 		<item value="false" key="isRegEx"/>
 		<item value="false" key="incremental"/>
 		<item value="false" key="wholeword"/>
-		<item value="getData" key="selection"/>
+		<item value="tmp" key="selection"/>
 		<list key="findhistory">
+			<item value="tmp"/>
+			<item value="temp"/>
+			<item value="RANGE"/>
+			<item value="BORDER"/>
+			<item value="BOARDER"/>
+			<item value="width"/>
+			<item value="rectHeight"/>
 			<item value="getData"/>
-			<item value="userIsDrawing"/>
-			<item value="haveSetShapeStartData"/>
-			<item value="MAX"/>
 		</list>
 		<list key="replacehistory">
+			<item value="tmp"/>
+			<item value="BORDERWIDTH"/>
+			<item value="BORDER"/>
 			<item value="setShapeStartData"/>
 			<item value="haveSetShapeStartData"/>
 		</list>

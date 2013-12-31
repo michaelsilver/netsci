@@ -4,10 +4,26 @@ import processing.core.PApplet;
 
 public class Main extends PApplet {
 	int MAX = 10000;
+	int BORDERWIDTH = 15;
+	int BORDERHEIGHT = 20;
+	int RANGE = 256;
+	int STRIPEWIDTH = 2 * BORDERWIDTH;
+	int BUTTONHEIGHT = 30;
+	int MENUAREAWIDTH = 3 * BORDERWIDTH + RANGE - 1 + STRIPEWIDTH;
+	int MENUAREAHEIGHT = 2 * BORDERHEIGHT + BUTTONHEIGHT;
+	int SAMPLEBOXHEIGHT = 30;
+	int REDBLUEBOXSTARTX;
+	int REDBLUEBOXSTARTY = BORDERWIDTH;
+	int STRIPESTARTX;
+	int STRIPESTARTY = BORDERWIDTH;
+	int[][] keyPoint = new int[6][2]; // 6 key points, each with an (x,y)
+										// corresponding to indeces (0,1)
+	int red, green, blue;
+
 	Createable pointShape, lineShape, rectShape, squareShape, ellipseShape,
 			circleShape;
 	Draw freeDraw, easingDraw;
-	// Draw freeDraw, easingDraw;
+	MenuItem redBlueBox, greenStripe;
 
 	/**
 	 * 
@@ -17,6 +33,8 @@ public class Main extends PApplet {
 	@Override
 	public void setup() {
 		size(GetScreenWorkingWidth(), GetScreenWorkingHeight());
+		REDBLUEBOXSTARTX = width - MENUAREAWIDTH + BORDERWIDTH;
+		STRIPESTARTX = width - BORDERWIDTH - STRIPEWIDTH;
 		pointShape = new Createable();
 		lineShape = new Createable();
 		rectShape = new Createable();
@@ -25,13 +43,36 @@ public class Main extends PApplet {
 		circleShape = new Createable();
 		freeDraw = new Draw();
 		easingDraw = new Draw();
+		redBlueBox = new MenuItem();
+		greenStripe = new MenuItem();
 
-		println("press l to draw line");
-		println("press r to draw rectangle");
-		println("press c for circle");
-		println("press d for freeDraw");
-		println("ScreenWidth: " + GetScreenWorkingWidth());
-		println("ScreenHeight: " + GetScreenWorkingHeight());
+		keyPoint[0][0] = width - MENUAREAWIDTH;
+		keyPoint[0][1] = 0;
+		keyPoint[1][0] = width;
+		keyPoint[1][1] = 0;
+		keyPoint[2][0] = width;
+		keyPoint[2][1] = height;
+		keyPoint[3][0] = 0;
+		keyPoint[3][1] = height;
+		keyPoint[4][0] = 0;
+		keyPoint[4][1] = height - MENUAREAHEIGHT;
+		keyPoint[5][0] = width - MENUAREAWIDTH;
+		keyPoint[5][1] = height - MENUAREAHEIGHT;
+
+		println("Keyboard Shortcuts:");
+		println(" - press l to draw line");
+		println(" - press r to draw rectangle");
+		println(" - press s to draw square");
+		println(" - press o to draw ellipse");
+		println(" - press c to draw circle");
+		println(" - press d to freeDraw");
+		println(" - press e to draw with easing");
+		// Below prints are for developer purposes
+		/*
+		 * println("ScreenWidth: " + GetScreenWorkingWidth()); println("Width: "
+		 * + width); println("ScreenHeight: " + GetScreenWorkingHeight());
+		 * println("Height: " + height);
+		 */
 	}
 
 	public static void main(String[] args) {
@@ -49,10 +90,15 @@ public class Main extends PApplet {
 	}
 
 	public void draw() {// called by processing after setup and then every 100
-						// millis
+						// milliseconds
 		background(255, 255, 255);
 		smooth();
 		noFill();
+		// BACKGROUND
+		drawMenuArea();
+		drawCanvas();
+		drawOutlining();
+		// DRAWING
 		pointShape.drawPoint();
 		lineShape.drawLine();
 		rectShape.drawRect();
@@ -61,6 +107,12 @@ public class Main extends PApplet {
 		circleShape.drawCircle();
 		freeDraw.drawLine();
 		easingDraw.drawLine();
+		// MENU ITEMS
+		redBlueBox.drawRedBlueBox();
+		greenStripe.drawGreenStripe();
+		redBlueBox.drawYellowPoint();
+		greenStripe.drawYellowLine();
+		drawSampleColorBox();
 	}
 
 	public void mouseClicked() {// called by processing on mouse click
@@ -85,6 +137,9 @@ public class Main extends PApplet {
 		} else if (key == 'e' || key == 'E') {
 			easingDraw.setDrawStartData();
 		}
+		// MENU ITEMS
+		greenStripe.stripeClicked();
+		redBlueBox.boxClicked();
 	}
 
 	public void mouseMoved() {
@@ -107,6 +162,7 @@ public class Main extends PApplet {
 		} else if (key == 'e' || key == 'E') {
 			easingDraw.setEasingDrawEndData();
 		}
+
 	}
 
 	class Createable {
@@ -149,26 +205,6 @@ public class Main extends PApplet {
 		 * 0 && dataPoint3 != 0 && dataPoint4 != 0) { return true; } else {
 		 * return false; } }
 		 */
-		boolean haveData(float[] dataPoint, int arrayLength) { // I want to add
-																// this to the
-																// library
-			int j = 0;
-			for (int i = 0; i < arrayLength; i++) {
-				if (dataPoint[i] != 0) {
-					j++;
-				}
-			}
-			if (j == arrayLength) {
-				return true;
-			} else {
-				return false;
-			}
-		}
-
-		void circle(float x, float y, float radius) { // I want to add this to
-														// the library
-			ellipse(x, y, 2 * radius, 2 * radius);
-		}
 
 		void drawPoint() {
 			for (int i = 0; i < numberOfShapes; i++) {
@@ -178,8 +214,8 @@ public class Main extends PApplet {
 
 		void drawLine() {
 			for (int i = 0; i < numberOfShapes; i++) {
-				float[] temp = { xStarts[i], yStarts[i], xEnds[i], yEnds[i] };
-				if (haveData(temp, 4)) {
+				float[] tmp = { xStarts[i], yStarts[i], xEnds[i], yEnds[i] };
+				if (haveData(tmp, 4)) {
 					line(xStarts[i], yStarts[i], xEnds[i], yEnds[i]);
 				}
 			}
@@ -188,19 +224,19 @@ public class Main extends PApplet {
 		void drawRect() {
 			for (int i = 0; i < numberOfShapes; i++) {
 				rectMode(CORNERS);
-				float[] temp = { xStarts[i], yStarts[i], xEnds[i], yEnds[i] };
-				if (haveData(temp, 4)) {
+				float[] tmp = { xStarts[i], yStarts[i], xEnds[i], yEnds[i] };
+				if (haveData(tmp, 4)) {
 					rect(xStarts[i], yStarts[i], xEnds[i], yEnds[i]);
 				}
 			}
 		}
 
-		void drawSquare() {
+		void drawSquare() { // look at - now working properly
 			for (int i = 0; i < numberOfShapes; i++) {
 				rectMode(CORNERS);
 				float[] side = new float[MAX];
-				float[] temp = { xStarts[i], yStarts[i], xEnds[i], yEnds[i] };
-				if (haveData(temp, 4)) {
+				float[] tmp = { xStarts[i], yStarts[i], xEnds[i], yEnds[i] };
+				if (haveData(tmp, 4)) {
 					if (abs(xEnds[i] - xStarts[i]) >= abs(yEnds[i] - yStarts[i])) {
 						if (xEnds[i] >= xStarts[i]) {
 							side[i] = xEnds[i] - xStarts[i];
@@ -228,13 +264,14 @@ public class Main extends PApplet {
 			for (int i = 0; i < numberOfShapes; i++) {
 				float[] ellipseWidth = new float[MAX];
 				float[] ellipseHeight = new float[MAX];
-				float[] temp = { xStarts[i], yStarts[i], xEnds[i], yEnds[i] };
-				if (haveData(temp, 4)) {
+				float[] tmp = { xStarts[i], yStarts[i], xEnds[i], yEnds[i] };
+				if (haveData(tmp, 4)) {
 					ellipseWidth[i] = 2 * abs(xEnds[i] - xStarts[i]);
 					ellipseHeight[i] = 2 * abs(yEnds[i] - yStarts[i]);
 					ellipse(xStarts[i], yStarts[i], ellipseWidth[i],
 							ellipseHeight[i]);
 				}
+
 				if (haveSetShapeStartData && wantAssistingRectangle) {
 					rectMode(CENTER);
 					xRectStart = xStarts[numberOfShapes - 1];
@@ -249,8 +286,8 @@ public class Main extends PApplet {
 		void drawCircle() {
 			for (int i = 0; i < numberOfShapes; i++) {
 				float[] radius = new float[MAX];
-				float[] temp = { xStarts[i], yStarts[i], xEnds[i], yEnds[i] };
-				if (haveData(temp, 4)) {
+				float[] tmp = { xStarts[i], yStarts[i], xEnds[i], yEnds[i] };
+				if (haveData(tmp, 4)) {
 					radius[i] = dist(xStarts[i], yStarts[i], xEnds[i], yEnds[i]);
 					circle(xStarts[i], yStarts[i], radius[i]);
 				}
@@ -289,5 +326,149 @@ public class Main extends PApplet {
 				numberOfShapes++;
 			}
 		}
+	}
+
+	class MenuItem {
+		int x, y;
+		boolean clicked = false;
+
+		void drawRedBlueBox() {
+			for (int red = 0; red < RANGE; red++) {
+				for (int blue = 0; blue < RANGE; blue++) {
+					if (!greenStripe.clicked && inGreenStripe()) {
+						stroke(red, mouseY - STRIPESTARTY, blue);
+					} else if (greenStripe.clicked) {
+						green = greenStripe.y - STRIPESTARTY;
+						stroke(red, green, blue);
+					} else {
+						stroke(red, 0, blue);
+					}
+					point(REDBLUEBOXSTARTX + red, REDBLUEBOXSTARTY + blue);
+				}
+			}
+		}
+
+		void drawGreenStripe() {
+			for (int green = 0; green < RANGE; green++) {
+				if (!redBlueBox.clicked && inRedBlueBox()) {
+					stroke(mouseX - REDBLUEBOXSTARTX, green, mouseY
+							- REDBLUEBOXSTARTY);
+				} else if (redBlueBox.clicked) {
+					red = redBlueBox.x - REDBLUEBOXSTARTX;
+					blue = redBlueBox.y - REDBLUEBOXSTARTY;
+					stroke(red, green, blue);
+				} else {
+					stroke(0, green, 0);
+				}
+				line(STRIPESTARTX, green + STRIPESTARTY, STRIPESTARTX
+						+ STRIPEWIDTH, green + STRIPESTARTY);
+			}
+		}
+
+		void boxClicked() {
+			if (inRedBlueBox()) {
+				clicked = true;
+				x = mouseX;
+				y = mouseY;
+			} else if (!inGreenStripe()) {
+				clicked = false;
+			}
+		}
+
+		void drawYellowPoint() {
+			if (clicked) {
+				stroke(255, 255, 0);
+				point(x, y);
+			}
+		}
+
+		void stripeClicked() {
+			if (inGreenStripe()) {
+				clicked = true;
+				y = mouseY;
+			} else if (!inRedBlueBox()) {
+				clicked = false;
+			}
+		}
+
+		void drawYellowLine() {
+			if (clicked) {
+				stroke(255, 255, 0);
+				line(STRIPESTARTX, y, STRIPESTARTX + STRIPEWIDTH, y);
+			}
+		}
+	}
+
+	// CODE-SPECIFIC FUNCTIONS
+	boolean inRedBlueBox() {
+		return inRect(mouseX, mouseY, REDBLUEBOXSTARTX, REDBLUEBOXSTARTY,
+				REDBLUEBOXSTARTX + RANGE, REDBLUEBOXSTARTY + RANGE);
+	}
+
+	boolean inGreenStripe() {
+		return inRect(mouseX, mouseY, STRIPESTARTX, STRIPESTARTY, STRIPESTARTX
+				+ STRIPEWIDTH, STRIPESTARTY + RANGE);
+	}
+
+	// UTLITIES -- I want to add all these to the library
+	boolean inRect(int x, int y, int targetXStart, int targetYStart,
+			int targetXEnd, int targetYEnd) {
+		return inRange(x, targetXStart, targetXEnd)
+				&& inRange(y, targetYStart, targetYEnd);
+	}
+
+	boolean inRange(int value, int start, int end) {
+		return value >= start && value <= end;
+	}
+
+	boolean haveData(float[] dataPoint, int arrayLength) {
+		int j = 0;
+		for (int i = 0; i < arrayLength; i++) {
+			if (dataPoint[i] != 0) {
+				j++;
+			}
+		}
+		if (j == arrayLength) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	void circle(float x, float y, float radius) {
+		ellipse(x, y, 2 * radius, 2 * radius);
+	}
+
+	// MENU ITEMS
+	void drawMenuArea() {
+		noStroke();
+		fill(RANGE / 2, RANGE / 2, RANGE / 2);
+		rectMode(CORNERS);
+		rect(0, 0, width, height);
+	}
+
+	void drawCanvas() {
+		noStroke();
+		fill(255, 255, 255); // to be determined by menu item
+		rectMode(CORNERS);
+		rect(0, 0, width - MENUAREAWIDTH, height - MENUAREAHEIGHT);
+	}
+
+	void drawOutlining() {
+		stroke(0, 0, 0);
+		for (int i = 0; i < 5; i++) {
+			line(keyPoint[i][0], keyPoint[i][1], keyPoint[i + 1][0],
+					keyPoint[i + 1][1]);
+		}
+		line(keyPoint[5][0], keyPoint[5][1], keyPoint[0][0], keyPoint[0][1]);
+	}
+
+	void drawSampleColorBox() {
+		noStroke();
+		fill(red, green, blue);
+		rectMode(CORNERS);
+		rect(REDBLUEBOXSTARTX, REDBLUEBOXSTARTY + RANGE + BORDERWIDTH,
+				STRIPESTARTX + STRIPEWIDTH + 1, STRIPESTARTY + RANGE
+						+ BORDERWIDTH + SAMPLEBOXHEIGHT);
 	}
 }

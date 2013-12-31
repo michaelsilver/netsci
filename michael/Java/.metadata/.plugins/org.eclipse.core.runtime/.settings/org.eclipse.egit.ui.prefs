@@ -1,2 +1,2 @@
-commit_dialog_history_messages=<?xml version\="1.0" encoding\="UTF-8"?>\n<messages>\n<message>Test Commit From Eclipse</message>\n</messages>
+commit_dialog_history_messages=<?xml version\="1.0" encoding\="UTF-8"?>\n<messages>\n<message>New features ADDED\:&\#x0A;-freedraw WITH EASING (for more accurate freedrawing) {press e}&\#x0A;-ability to draw an ellipse (with assisting rectangle) {press o}&\#x0A;-(buggy) draw square {press s}&\#x0A;&\#x0A;Features to come\:&\#x0A;-a menue system, including colors&\#x0A;&\#x0A;To be Debugged\:&\#x0A;-square drawing feature</message>\n<message>Test Commit From Eclipse</message>\n</messages>
 eclipse.preferences.version=1
