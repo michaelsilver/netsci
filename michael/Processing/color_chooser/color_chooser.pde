@@ -91,10 +91,21 @@ class Object {
   boolean clicked = false;
   
   void drawBox() {
+    for (int r=0; r<RANGE; r++) {
+      for (int b=0; b<RANGE; b++) {
+        stroke (r, g, b);
+        point (r, b);
+      }
   }
   
   void drawLine() {
-    
+    for (int g=0; g<RANGE; g++) {
+      //if (!clicked) {
+      //  stroke (mouseX-10, g, mouseY-10);
+      //} else if (clicked){
+        stroke (0, g, 0);
+      //}
+      line (0, g, BORDER, g);
   }
   
   void boxClicked() {
