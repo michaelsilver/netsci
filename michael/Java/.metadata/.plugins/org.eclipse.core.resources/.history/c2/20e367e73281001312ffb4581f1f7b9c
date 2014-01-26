@@ -1,0 +1,14 @@
+package gtica;
+
+public class Main {
+	
+		//first declention
+		public String declineFirst(String type, char number) {
+			return ;
+		}
+		//second declention
+		//third declention
+		//fourth declention
+		//fifth declention
+	
+}
