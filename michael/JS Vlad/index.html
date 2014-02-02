@@ -1,0 +1,50 @@
+<html>
+<head>
+  <title>Grammatica</title>
+  <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+</head>
+
+<body>
+ <h1>Welcome to Grammatica!</h1>
+ <h3 id="declension"></h3>
+ <input type="text" id="in"><br>
+ <input type="text" id="out"><br>
+ <input type="button" value="Boom!" id="boom">
+
+<script type="text/javascript">
+var declensions = ['Nominative', 'Genetive', 'Dative', 'Accusative', 'Ablative']
+
+var nous = ['domus', 'unus', 'animus'];
+// save current declension in a var
+var declension = ...
+$("#declension").html(declensions[Math.floor(Math.random()*5)]);
+
+$( "#boom").click(function() {
+    for (var i = 0; i < declensions.length; i++){
+        // console.log(declensions[i]);
+    }
+
+    // take a random verb from a dictionary nouns and stick it into a div
+    var indata = $("#in").val();
+    var stem = indata.slice(0,indata.lastIndexOf("us"));
+    // take saved declension, declense the verb, stick it into another var and compare to second field
+    if ($("#out").val() == decline(noun, declension)) {
+        console.log("Correct!");
+    } else {
+        console.log("Wrong!");
+    }
+});
+
+function decline(noun, declension){
+
+    return declinedNoun;
+};
+
+function stem(noun){
+
+    return stem;
+};
+</script>
+</body>
+</html>
