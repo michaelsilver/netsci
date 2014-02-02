@@ -1,0 +1,20 @@
+<html>
+<head>
+  <title>Grammatica</title>
+  <script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+</head>
+
+<body>
+ <h1>Welcome to Grammatica!</h1>
+ <input type="text" id="in"><br>
+ <input type="text" id="out"><br>
+ <input type="button" value="Boom!" id="boom">
+
+<script type="text/javascript">
+$( "#boom").click(function() {
+	$( "#in").val().appendTo( "#out")
+})
+</script>
+</body>
+</html>
