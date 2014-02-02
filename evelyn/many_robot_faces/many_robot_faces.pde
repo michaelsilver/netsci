@@ -1,15 +1,15 @@
-size (640, 640);
-
+int grid_width = 640;
+int grid_height = 480;
 //parameters
 float faceHeight  = 20;
 float faceWidth   = faceHeight * 1.6;
 
 float outerBorder = 50;
-float numXFaces   = 20;
-float numYFaces   = 20;
+int numXFaces   = 20;
+int numYFaces   = 20;
 
-float gridWidth  = width - outerBorder * 2;
-float gridHeight = height - outerBorder * 2;
+float gridWidth  = grid_width - outerBorder * 2;
+float gridHeight = grid_height - outerBorder * 2;
 float gridCellWidth = gridWidth / numXFaces;
 float gridCellHeight = gridHeight / numYFaces;
 
@@ -28,11 +28,22 @@ int christmasRed   = #7C2525;
 int christmasGreen = #257C33;
 float chanceRed = 0.7;
 
-randomSeed(1243);
+boolean[][] colors = new boolean[numXFaces][numYFaces];
 
-for (float cellXIndex = 0; cellXIndex < numXFaces; cellXIndex += 1){
-  for(float cellYIndex = 0; cellYIndex < numYFaces; cellYIndex += 1){
-    if(random(1) < chanceRed){
+void setup(){
+  size (grid_width, grid_height);
+  randomSeed(1243);
+}
+void mouseClicked(){
+  int cellX = (int)((mouseX-outerBorder) / gridCellWidth);
+  int cellY = (int)((mouseY-outerBorder) / gridCellHeight);
+  colors[cellX][cellY] = ! colors[cellX][cellY];
+}
+void draw(){
+  
+for (int cellXIndex = 0; cellXIndex < numXFaces; cellXIndex += 1){
+  for(int cellYIndex = 0; cellYIndex < numYFaces; cellYIndex += 1){
+    if(colors[cellXIndex][cellYIndex]){
       fill(christmasRed);
     }else{
       fill(christmasGreen);
@@ -53,4 +64,5 @@ for (float cellXIndex = 0; cellXIndex < numXFaces; cellXIndex += 1){
     line(smileXStart, smileY, smileXEnd, smileY);
     popMatrix();
   }
+}
 }

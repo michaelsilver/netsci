@@ -1,0 +1,31 @@
+<!doctype html>
+<html>
+
+<head>
+
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+<script src="http://code.jquery.com/jquery-migrate-1.2.1.min.js"></script>
+
+<script>
+
+var $input = jQuery('#input');
+var $ouput = jQuery('#output');
+var fn = function(){
+	console.log('aba');
+	var xxx = $input.val();
+	$output.val(xxx);
+};
+jQuery("#a").click(fn);
+
+</script>
+</head>
+
+<body>
+
+<textarea id="input"></textarea>
+<a id="a" href="#">Do It!</a>
+<textarea id="output"></textarea>
+
+</body>
+
+</html>
