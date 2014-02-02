@@ -1,14 +1,16 @@
-﻿Build started 1/26/2014 10:45:23 AM.
-     1>Project "C:\Users\Michael Silver\Dropbox\Education\Boston University Academy\10th Grade\NetSci\michael\GrammaticaConcept\GrammaticaConcept\GrammaticaConcept.vcxproj" on node 2 (Build target(s)).
+﻿Build started 1/26/2014 2:08:41 PM.
+     1>Project "C:\Users\Michael Silver\Dropbox\Education\Boston University Academy\10th Grade\NetSci\michael\C++\GrammaticaConcept\GrammaticaConcept\GrammaticaConcept.vcxproj" on node 2 (Build target(s)).
      1>ClCompile:
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yc"stdafx.h" /Fp"Debug\GrammaticaConcept.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt stdafx.cpp
+         stdafx.cpp
          C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\CL.exe /c /ZI /nologo /W3 /WX- /sdl /Od /Oy- /D WIN32 /D _DEBUG /D _CONSOLE /D _LIB /D _UNICODE /D UNICODE /Gm /EHsc /RTC1 /MDd /GS /fp:precise /Zc:wchar_t /Zc:forScope /Yu"stdafx.h" /Fp"Debug\GrammaticaConcept.pch" /Fo"Debug\\" /Fd"Debug\vc120.pdb" /Gd /TP /analyze- /errorReport:prompt GrammaticaConcept.cpp
          GrammaticaConcept.cpp
        Link:
-         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Michael Silver\Dropbox\Education\Boston University Academy\10th Grade\NetSci\michael\GrammaticaConcept\Debug\GrammaticaConcept.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Michael Silver\Dropbox\Education\Boston University Academy\10th Grade\NetSci\michael\GrammaticaConcept\Debug\GrammaticaConcept.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Michael Silver\Dropbox\Education\Boston University Academy\10th Grade\NetSci\michael\GrammaticaConcept\Debug\GrammaticaConcept.lib" /MACHINE:X86 Debug\GrammaticaConcept.obj
+         C:\Program Files (x86)\Microsoft Visual Studio 12.0\VC\bin\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\Michael Silver\Dropbox\Education\Boston University Academy\10th Grade\NetSci\michael\C++\GrammaticaConcept\Debug\GrammaticaConcept.exe" /INCREMENTAL /NOLOGO kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /manifest:embed /DEBUG /PDB:"C:\Users\Michael Silver\Dropbox\Education\Boston University Academy\10th Grade\NetSci\michael\C++\GrammaticaConcept\Debug\GrammaticaConcept.pdb" /SUBSYSTEM:CONSOLE /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\Michael Silver\Dropbox\Education\Boston University Academy\10th Grade\NetSci\michael\C++\GrammaticaConcept\Debug\GrammaticaConcept.lib" /MACHINE:X86 Debug\GrammaticaConcept.obj
          Debug\stdafx.obj
-         GrammaticaConcept.vcxproj -> C:\Users\Michael Silver\Dropbox\Education\Boston University Academy\10th Grade\NetSci\michael\GrammaticaConcept\Debug\GrammaticaConcept.exe
-     1>Done Building Project "C:\Users\Michael Silver\Dropbox\Education\Boston University Academy\10th Grade\NetSci\michael\GrammaticaConcept\GrammaticaConcept\GrammaticaConcept.vcxproj" (Build target(s)).
+         GrammaticaConcept.vcxproj -> C:\Users\Michael Silver\Dropbox\Education\Boston University Academy\10th Grade\NetSci\michael\C++\GrammaticaConcept\Debug\GrammaticaConcept.exe
+     1>Done Building Project "C:\Users\Michael Silver\Dropbox\Education\Boston University Academy\10th Grade\NetSci\michael\C++\GrammaticaConcept\GrammaticaConcept\GrammaticaConcept.vcxproj" (Build target(s)).
 
 Build succeeded.
 
-Time Elapsed 00:00:00.96
+Time Elapsed 00:00:15.77

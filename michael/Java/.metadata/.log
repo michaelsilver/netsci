@@ -1940,3 +1940,134 @@ Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -product org.eclipse.
 
 !ENTRY org.eclipse.ui 4 4 2013-12-31 16:05:15.770
 !MESSAGE Unable to find Action Set: org.eclipse.mylyn.tasks.ui.navigation
+
+!ENTRY org.eclipse.egit.core 4 0 2013-12-31 16:11:00.120
+!MESSAGE An exception occurred during push on URI https://github.com/amit-bansil/netsci.git: https://github.com/amit-bansil/netsci.git: not authorized
+!STACK 0
+org.eclipse.jgit.api.errors.TransportException: https://github.com/amit-bansil/netsci.git: not authorized
+	at org.eclipse.jgit.api.PushCommand.call(PushCommand.java:160)
+	at org.eclipse.egit.core.op.PushOperation.run(PushOperation.java:221)
+	at org.eclipse.egit.ui.internal.push.PushOperationUI.execute(PushOperationUI.java:164)
+	at org.eclipse.egit.ui.internal.push.PushOperationUI$1.run(PushOperationUI.java:226)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
+Caused by: org.eclipse.jgit.errors.TransportException: https://github.com/amit-bansil/netsci.git: not authorized
+	at org.eclipse.jgit.transport.TransportHttp.connect(TransportHttp.java:479)
+	at org.eclipse.jgit.transport.TransportHttp.openPush(TransportHttp.java:398)
+	at org.eclipse.jgit.transport.PushProcess.execute(PushProcess.java:154)
+	at org.eclipse.jgit.transport.Transport.push(Transport.java:1173)
+	at org.eclipse.jgit.api.PushCommand.call(PushCommand.java:156)
+	... 4 more
+
+!ENTRY org.eclipse.egit.core 4 0 2013-12-31 16:12:42.959
+!MESSAGE An exception occurred during push on URI https://github.com/amit-bansil/netsci.git: https://github.com/amit-bansil/netsci.git: not authorized
+!STACK 0
+org.eclipse.jgit.api.errors.TransportException: https://github.com/amit-bansil/netsci.git: not authorized
+	at org.eclipse.jgit.api.PushCommand.call(PushCommand.java:160)
+	at org.eclipse.egit.core.op.PushOperation.run(PushOperation.java:221)
+	at org.eclipse.egit.ui.internal.push.PushOperationUI.execute(PushOperationUI.java:164)
+	at org.eclipse.egit.ui.internal.push.PushOperationUI$1.run(PushOperationUI.java:226)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
+Caused by: org.eclipse.jgit.errors.TransportException: https://github.com/amit-bansil/netsci.git: not authorized
+	at org.eclipse.jgit.transport.TransportHttp.connect(TransportHttp.java:479)
+	at org.eclipse.jgit.transport.TransportHttp.openPush(TransportHttp.java:398)
+	at org.eclipse.jgit.transport.PushProcess.execute(PushProcess.java:154)
+	at org.eclipse.jgit.transport.Transport.push(Transport.java:1173)
+	at org.eclipse.jgit.api.PushCommand.call(PushCommand.java:156)
+	... 4 more
+
+!ENTRY org.eclipse.egit.core 4 0 2013-12-31 16:14:00.442
+!MESSAGE An exception occurred during push on URI https://github.com/amit-bansil/netsci.git: https://github.com/amit-bansil/netsci.git: not authorized
+!STACK 0
+org.eclipse.jgit.api.errors.TransportException: https://github.com/amit-bansil/netsci.git: not authorized
+	at org.eclipse.jgit.api.PushCommand.call(PushCommand.java:160)
+	at org.eclipse.egit.core.op.PushOperation.run(PushOperation.java:221)
+	at org.eclipse.egit.ui.internal.push.PushOperationUI.execute(PushOperationUI.java:164)
+	at org.eclipse.egit.ui.internal.push.PushOperationUI$1.run(PushOperationUI.java:226)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:53)
+Caused by: org.eclipse.jgit.errors.TransportException: https://github.com/amit-bansil/netsci.git: not authorized
+	at org.eclipse.jgit.transport.TransportHttp.connect(TransportHttp.java:479)
+	at org.eclipse.jgit.transport.TransportHttp.openPush(TransportHttp.java:398)
+	at org.eclipse.jgit.transport.PushProcess.execute(PushProcess.java:154)
+	at org.eclipse.jgit.transport.Transport.push(Transport.java:1173)
+	at org.eclipse.jgit.api.PushCommand.call(PushCommand.java:156)
+	... 4 more
+!SESSION 2014-01-02 19:35:53.953 -----------------------------------------------
+eclipse.buildId=4.3.0.M20130911-1000
+java.version=1.6.0_65
+java.vendor=Apple Inc.
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.standard.product -keyring /Users/michaelsilver/.eclipse_keyring -showlocation
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -product org.eclipse.epp.package.standard.product -keyring /Users/michaelsilver/.eclipse_keyring -showlocation
+
+!ENTRY org.eclipse.core.net 1 0 2014-01-02 19:36:09.316
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+
+!ENTRY org.eclipse.ui 4 4 2014-01-02 19:36:11.450
+!MESSAGE Unable to find Action Set: org.eclipse.mylyn.context.ui.actionSet
+
+!ENTRY org.eclipse.ui 4 4 2014-01-02 19:36:11.450
+!MESSAGE Unable to find Action Set: org.eclipse.mylyn.tasks.ui.navigation
+!SESSION 2014-01-19 10:22:43.974 -----------------------------------------------
+eclipse.buildId=4.3.0.M20130911-1000
+java.version=1.6.0_65
+java.vendor=Apple Inc.
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.standard.product -keyring /Users/michaelsilver/.eclipse_keyring -showlocation
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -product org.eclipse.epp.package.standard.product -keyring /Users/michaelsilver/.eclipse_keyring -showlocation
+
+!ENTRY org.eclipse.core.net 1 0 2014-01-19 10:22:59.953
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+
+!ENTRY org.eclipse.ui 4 4 2014-01-19 10:23:02.557
+!MESSAGE Unable to find Action Set: org.eclipse.mylyn.context.ui.actionSet
+
+!ENTRY org.eclipse.ui 4 4 2014-01-19 10:23:02.558
+!MESSAGE Unable to find Action Set: org.eclipse.mylyn.tasks.ui.navigation
+!SESSION 2014-01-19 12:53:49.154 -----------------------------------------------
+eclipse.buildId=4.3.0.M20130911-1000
+java.version=1.6.0_65
+java.vendor=Apple Inc.
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.standard.product -keyring /Users/michaelsilver/.eclipse_keyring -showlocation
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -product org.eclipse.epp.package.standard.product -keyring /Users/michaelsilver/.eclipse_keyring -showlocation
+
+!ENTRY org.eclipse.core.net 1 0 2014-01-19 12:53:57.808
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+
+!ENTRY org.eclipse.ui 4 4 2014-01-19 12:53:59.487
+!MESSAGE Unable to find Action Set: org.eclipse.mylyn.context.ui.actionSet
+
+!ENTRY org.eclipse.ui 4 4 2014-01-19 12:53:59.487
+!MESSAGE Unable to find Action Set: org.eclipse.mylyn.tasks.ui.navigation
+!SESSION 2014-01-19 14:01:21.776 -----------------------------------------------
+eclipse.buildId=4.3.0.M20130911-1000
+java.version=1.6.0_65
+java.vendor=Apple Inc.
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.standard.product -keyring /Users/michaelsilver/.eclipse_keyring -showlocation
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -product org.eclipse.epp.package.standard.product -keyring /Users/michaelsilver/.eclipse_keyring -showlocation
+
+!ENTRY org.eclipse.core.net 1 0 2014-01-19 14:01:41.626
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+
+!ENTRY org.eclipse.ui 4 4 2014-01-19 14:01:46.030
+!MESSAGE Unable to find Action Set: org.eclipse.mylyn.context.ui.actionSet
+
+!ENTRY org.eclipse.ui 4 4 2014-01-19 14:01:46.031
+!MESSAGE Unable to find Action Set: org.eclipse.mylyn.tasks.ui.navigation
+!SESSION 2014-01-19 15:07:23.404 -----------------------------------------------
+eclipse.buildId=4.3.0.M20130911-1000
+java.version=1.6.0_65
+java.vendor=Apple Inc.
+BootLoader constants: OS=macosx, ARCH=x86_64, WS=cocoa, NL=en_US
+Framework arguments:  -product org.eclipse.epp.package.standard.product -keyring /Users/michaelsilver/.eclipse_keyring -showlocation
+Command-line arguments:  -os macosx -ws cocoa -arch x86_64 -product org.eclipse.epp.package.standard.product -keyring /Users/michaelsilver/.eclipse_keyring -showlocation
+
+!ENTRY org.eclipse.core.net 1 0 2014-01-19 15:07:34.984
+!MESSAGE System property http.nonProxyHosts has been set to local|*.local|169.254/16|*.169.254/16 by an external source. This value will be overwritten using the values from the preferences
+
+!ENTRY org.eclipse.ui 4 4 2014-01-19 15:07:36.843
+!MESSAGE Unable to find Action Set: org.eclipse.mylyn.context.ui.actionSet
+
+!ENTRY org.eclipse.ui 4 4 2014-01-19 15:07:36.843
+!MESSAGE Unable to find Action Set: org.eclipse.mylyn.tasks.ui.navigation

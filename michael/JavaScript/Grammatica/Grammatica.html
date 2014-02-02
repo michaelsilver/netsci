@@ -12,9 +12,14 @@
  <input type="button" value="Boom!" id="boom">
 
 <script type="text/javascript">
+var delention = [0,1,2,3,4,5]
 $( "#boom").click(function() {
-	$( "#in").val().appendTo( "#out")
-})
+	console.log($("#in").val());
+	var indata = $("#in").val();
+	var stem = indata.slice(0,indata.lastIndexOf("us"));
+	console.log(stem);
+	$("#out").val($("#in").val())
+});
 </script>
 </body>
 </html>

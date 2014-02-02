@@ -24,6 +24,7 @@ public class Main extends PApplet {
 			circleShape;
 	Draw freeDraw, easingDraw;
 	MenuItem redBlueBox, greenStripe;
+	private boolean menuchanged = true;
 
 	/**
 	 * 
@@ -67,12 +68,11 @@ public class Main extends PApplet {
 		println(" - press c to draw circle");
 		println(" - press d to freeDraw");
 		println(" - press e to draw with easing");
-		// Below prints are for developer purposes
-		/*
-		 * println("ScreenWidth: " + GetScreenWorkingWidth()); println("Width: "
-		 * + width); println("ScreenHeight: " + GetScreenWorkingHeight());
-		 * println("Height: " + height);
-		 */
+
+		// GUI
+		smooth();
+		// drawMenuArea();
+		// drawOutlining();
 	}
 
 	public static void main(String[] args) {
@@ -92,12 +92,11 @@ public class Main extends PApplet {
 	public void draw() {// called by processing after setup and then every 100
 						// milliseconds
 		background(255, 255, 255);
-		smooth();
 		noFill();
 		// BACKGROUND
-		drawMenuArea();
+		drawMenuArea(); // just once?
 		drawCanvas();
-		drawOutlining();
+		drawOutlining(); // just once?
 		// DRAWING
 		pointShape.drawPoint();
 		lineShape.drawLine();
@@ -108,11 +107,13 @@ public class Main extends PApplet {
 		freeDraw.drawLine();
 		easingDraw.drawLine();
 		// MENU ITEMS
-		redBlueBox.drawRedBlueBox();
-		greenStripe.drawGreenStripe();
-		redBlueBox.drawYellowPoint();
-		greenStripe.drawYellowLine();
-		drawSampleColorBox();
+		if (menuchanged ) {
+			redBlueBox.drawRedBlueBox();
+			greenStripe.drawGreenStripe();
+			redBlueBox.drawYellowPoint();
+			greenStripe.drawYellowLine();
+			drawSampleColorBox();
+		}
 	}
 
 	public void mouseClicked() {// called by processing on mouse click
@@ -237,23 +238,10 @@ public class Main extends PApplet {
 				float[] side = new float[MAX];
 				float[] tmp = { xStarts[i], yStarts[i], xEnds[i], yEnds[i] };
 				if (haveData(tmp, 4)) {
-					if (abs(xEnds[i] - xStarts[i]) >= abs(yEnds[i] - yStarts[i])) {
-						if (xEnds[i] >= xStarts[i]) {
-							side[i] = xEnds[i] - xStarts[i];
-						} else {
-							side[i] = xStarts[i] - xEnds[i];
-						}
-						yEnds[i] = yStarts[i] + side[i];
-					} else {
-						if (yEnds[i] >= yStarts[i]) {
-							side[i] = yEnds[i] - yStarts[i];
-						} else {
-							side[i] = yStarts[i] - yEnds[i];
-						}
-						xEnds[i] = xStarts[i] + side[i];
-					}
-					rect(xStarts[i], yStarts[i], xEnds[i], yEnds[i]);
+					side[i] = xEnds[i] - xStarts[i];
+					yEnds[i] = yStarts[i] + side[i];
 				}
+				rect(xStarts[i], yStarts[i], xEnds[i], yEnds[i]);
 			}
 		}
 
@@ -451,7 +439,7 @@ public class Main extends PApplet {
 		noStroke();
 		fill(255, 255, 255); // to be determined by menu item
 		rectMode(CORNERS);
-		rect(0, 0, width - MENUAREAWIDTH, height - MENUAREAHEIGHT);
+		rect(0, 0, width - MENUAREAWIDTH - 1, height - MENUAREAHEIGHT - 1);
 	}
 
 	void drawOutlining() {
