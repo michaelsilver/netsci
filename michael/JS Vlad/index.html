@@ -14,9 +14,126 @@
  <input type="button" value="Enter" id="enter">
 
 <script type="text/javascript">
+// TODO - put all this logic into functions, have button to 'reset' if correct, ask again if fail.
+// TODO - get rid of alerts, make green and red divs appear on check
+// Keep track of correct/incorrect answers.
 var cases = ['Nominative', 'Genetive', 'Dative', 'Accusative', 'Ablative']
-var numbers = ['Singular', 'Plural'];
+var numbers = ['Plural', 'Singular'];
 var nouns = ['domus', 'unus', 'animus'];
+var grammarDictNoun = 
+    {
+        1:
+        {
+            'singular':
+            {
+                'nominative' : 'us',
+                'genitive' : 'i',
+                'dative' : 'o',
+                'accusative' : 'um',
+                'ablative' : 'o',
+            },
+            'plural':
+            {
+                'nominative': 'i',
+                'genitive': 'orum',
+                'dative' : 'is',
+                'accusative' : 'os',
+                'ablative' : 'is',
+            },
+        },
+    }
+var quizletSet =
+{
+     "terms": [
+            {
+                "id": 1073408151,
+                "term": "initium -ii n.",
+                "definition": "beginning, commencement",
+                "image": null
+            },
+            {
+                "id": 1073408152,
+                "term": "ops, opis f.",
+                "definition": "help, aid",
+                "image": null
+            },
+            {
+                "id": 1073408153,
+                "term": "opes, opum f. pl.",
+                "definition": "power, resources, wealth",
+                "image": null
+            },
+            {
+                "id": 1073408154,
+                "term": "philosophus, i m. / philosopha, -ae f.",
+                "definition": "philosopher",
+                "image": null
+            },
+            {
+                "id": 1073408155,
+                "term": "plebs, plebis f.",
+                "definition": "the common people, populace, plebeians",
+                "image": null
+            },
+            {
+                "id": 1073408156,
+                "term": "sal, salis m.",
+                "definition": "salt; wit",
+                "image": null
+            },
+            {
+                "id": 1073408157,
+                "term": "speculum, i n.",
+                "definition": "mirror",
+                "image": null
+            },
+            {
+                "id": 1073408158,
+                "term": "candidus, -a, -um",
+                "definition": "shining, bright, white; beautiful",
+                "image": null
+            },
+            {
+                "id": 1073408159,
+                "term": "merus, -a, um",
+                "definition": "pure, undiluted",
+                "image": null
+            },
+            {
+                "id": 1073408160,
+                "term": "suavis, suave",
+                "definition": "sweet",
+                "image": null
+            },
+            {
+                "id": 1073408161,
+                "term": "heu",
+                "definition": "ah! , alas!",
+                "image": null
+            },
+            {
+                "id": 1073408162,
+                "term": "subito",
+                "definition": "adv. suddenly",
+                "image": null
+            },
+            {
+                "id": 1073408163,
+                "term": "recuso, recusare, recusavi, recusatum",
+                "definition": "to refuse",
+                "image": null
+            },
+            {
+                "id": 1073408164,
+                "term": "trado, tradere, tradidi, traditum",
+                "definition": "to give over, surrender; hand down, transmit, teach",
+                "image": null
+            }]
+}
+
+console.log(quizletSet);
+// var quizletSetLength = quizletSet['terms'].length();
+// console.log(quizletSetLength);
 // save current declension in a var
 // var declension = ...
 $("#case").html(cases[Math.floor(Math.random()*5)]);
@@ -24,63 +141,75 @@ $("#number").html(numbers[Math.floor(Math.random()*2)]);
 $("#prompt").html(nouns[Math.floor(Math.random()*3)]);
 
 var prompt = $("#prompt").text();
-var whichNumber = $("#number").text();
-var whichCase = $("#case").text();
+var whichNumber = $("#number").text().toLowerCase();
+var whichCase = $("#case").text().toLowerCase();
     //var stem = stem(indata);
-var stem = stem(prompt);
 // console.log(stem);
-$("#enter").click(function() {
+$("#enter").click(function(){
+    checkAnswer();
+});
+
+$("#userInput").keypress(function(event){
+    console.log(event);
+    if(event.which == 13){
+        console.log('fired!');
+       checkAnswer();
+    }
+    // event.stopPropagation();
+});
+
+function stem(noun, declension){
+    if (declension == 1) {
+        return noun.substring(0,noun.lastIndexOf('us'));
+    }
+    // modify for new term format
+};
+
+function decline(noun, whichCase, whichNumber, declension){
+    if (declension == 1) {
+        return stem(noun, 1) + grammarDictNoun[declension][whichNumber][whichCase];
+    }
+};
+
+function checkAnswer(){
     if ($("#userInput").val() == decline(prompt, whichCase, whichNumber, 1)) {
         alert("Correct!");
     } else {
         alert("Wrong!");
     }
-});
-
-function decline(noun, whichCase, whichNumber, declension){
-    if (declension == 1) {
-        if (whichNumber = 'Singular') {
-            if (whichCase == 'Nominative') {
-                return stem(noun, 1) + 'us';
-            } 
-            else if (whichCase == 'Genetive') {
-                return stem(noun, 1) + 'i';
-            } 
-            else if (whichCase == 'Dative') {
-                return stem(noun, 1) + 'o';
-            }
-            else if (whichCase == 'Accusative') {
-                return stem(noun, 1) + 'um';
-            }
-            else if (whichCase == 'Ablative') {
-                return stem(noun, 1) + 'o';
-            }
-        }
-        else if (whichNumber = 'Plural') {
-            if (whichCase == 'Nominative') {
-                return stem(noun, 1) + 'i';
-            } 
-            else if (whichCase == 'Genetive') {
-                return stem(noun, 1) + 'orum';
-            } 
-            else if (whichCase == 'Dative') {
-                return stem(noun, 1) + 'is';
-            }
-            else if (whichCase == 'Accusative') {
-                return stem(noun, 1) + 'os';
-            }
-            else if (whichCase == 'Ablative') {
-                return stem(noun, 1) + 'is';
-            }
-        }
-    }
+    console.log(prompt, whichCase, whichNumber);
+    console.log(decline(prompt, whichCase, whichNumber, 1))
 };
 
-function stem(noun, declension){
-    if (declension == 1) {
-        return noun.substring(0,noun.lastIndexOf("us"));
-    }
-};
+
+// console.log(grammarDictNoun['Nominative']);
+// $.ajax({
+//     url: 'https://api.quizlet.com/2.0/users/frenchmichel/sets?client_id=BzBNnKHpmx',
+//     type: "GET",
+//     beforeSend: function(xhr){xhr.setRequestHeader('Content-type', 'text/json')},
+//     success: function(data){
+//         console.log(data);
+//     }
+// });
+
+
+// $.ajax({
+//     type: "GET",
+//     beforeSend: function (request)
+//     {
+//         request.withCredentials = true;
+//         request.setRequestHeader("Authorization", "Bearer  dG9tY2F0OnRvbWNhdA==");
+//     },
+//     url: "http://localhost:1222/testservice/rest/test/users",
+//     dataType:"jsonp",
+//     succes: function(res) {
+//         alert(ers); 
+//     },
+//     error: function(err) {
+//         alert(err);
+//     }
+//     //figure out OAuth 2.0 JavaScript call
+// });  
 </script>
 </body>
 </html>
