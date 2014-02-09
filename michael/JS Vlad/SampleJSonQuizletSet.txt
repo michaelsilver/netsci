@@ -1,0 +1,119 @@
+{
+        "id": 31362596,
+        "url": "http://quizlet.com/31362596/wheelock-latin-vocab-ch-33-flash-cards/",
+        "title": "Wheelock Latin Vocab ch. 33",
+        "created_by": "frenchmichel",
+        "term_count": 14,
+        "created_date": 1385517801,
+        "modified_date": 1385517801,
+        "has_images": false,
+        "subjects": [
+
+        ],
+        "visibility": "classes",
+        "editable": "classes",
+        "has_access": true,
+        "description": "feel free to correct or add.",
+        "lang_terms": "la",
+        "lang_definitions": "en",
+        "has_discussion": true,
+        "creator": {
+            "username": "frenchmichel",
+            "account_type": "free",
+            "profile_image": "https://quizlet.com/a/i/animals/18.7GYv.jpg",
+            "id": 1269217
+        },
+        "class_ids": [
+            266213
+        ],
+        "editor_class_ids": [
+            266213
+        ],
+        "terms": [
+            {
+                "id": 1073408151,
+                "term": "initium -ii n.",
+                "definition": "beginning, commencement",
+                "image": null
+            },
+            {
+                "id": 1073408152,
+                "term": "ops, opis f.",
+                "definition": "help, aid",
+                "image": null
+            },
+            {
+                "id": 1073408153,
+                "term": "opes, opum f. pl.",
+                "definition": "power, resources, wealth",
+                "image": null
+            },
+            {
+                "id": 1073408154,
+                "term": "philosophus, i m. / philosopha, -ae f.",
+                "definition": "philosopher",
+                "image": null
+            },
+            {
+                "id": 1073408155,
+                "term": "plebs, plebis f.",
+                "definition": "the common people, populace, plebeians",
+                "image": null
+            },
+            {
+                "id": 1073408156,
+                "term": "sal, salis m.",
+                "definition": "salt; wit",
+                "image": null
+            },
+            {
+                "id": 1073408157,
+                "term": "speculum, i n.",
+                "definition": "mirror",
+                "image": null
+            },
+            {
+                "id": 1073408158,
+                "term": "candidus, -a, -um",
+                "definition": "shining, bright, white; beautiful",
+                "image": null
+            },
+            {
+                "id": 1073408159,
+                "term": "merus, -a, um",
+                "definition": "pure, undiluted",
+                "image": null
+            },
+            {
+                "id": 1073408160,
+                "term": "suavis, suave",
+                "definition": "sweet",
+                "image": null
+            },
+            {
+                "id": 1073408161,
+                "term": "heu",
+                "definition": "ah! , alas!",
+                "image": null
+            },
+            {
+                "id": 1073408162,
+                "term": "subito",
+                "definition": "adv. suddenly",
+                "image": null
+            },
+            {
+                "id": 1073408163,
+                "term": "recuso, recusare, recusavi, recusatum",
+                "definition": "to refuse",
+                "image": null
+            },
+            {
+                "id": 1073408164,
+                "term": "trado, tradere, tradidi, traditum",
+                "definition": "to give over, surrender; hand down, transmit, teach",
+                "image": null
+            }
+        ],
+        "display_timestamp": "In November 2013"
+    },
