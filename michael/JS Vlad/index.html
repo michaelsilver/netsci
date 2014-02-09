@@ -193,23 +193,21 @@ function checkAnswer(){
 // });
 
 
-// $.ajax({
-//     type: "GET",
-//     beforeSend: function (request)
-//     {
-//         request.withCredentials = true;
-//         request.setRequestHeader("Authorization", "Bearer  dG9tY2F0OnRvbWNhdA==");
-//     },
-//     url: "http://localhost:1222/testservice/rest/test/users",
-//     dataType:"jsonp",
-//     succes: function(res) {
-//         alert(ers); 
-//     },
-//     error: function(err) {
-//         alert(err);
-//     }
-//     //figure out OAuth 2.0 JavaScript call
-// });  
+$.ajax({
+   type: "GET", 
+   dataType: "JSONP",
+   url: 'https://api.quizlet.com/2.0/sets/415?client_id=BzBNnKHpmx',
+   success: function(res){
+       callback(res);
+   }
+});
+
+function callback(data){
+   console.log("Success! Here's the returned data: ");
+   for (var i = 0; i < data['terms'].length; i++){
+       console.log(data['terms'][i]);
+   }
+}
 </script>
 </body>
 </html>
