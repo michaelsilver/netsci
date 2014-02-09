@@ -1,0 +1,42 @@
+AB = Team of Robots A and B
+CD = Team of Robots C and D
+
+Rank(AB) = 1
+Rank(CD) = 2
+
+Rank-1(AB) = 29
+Rank-1(CD) = 28 
+
+M23 = Match 23
+Score(M23,AB) = 40
+Score(M23,CD) = 30
+
+Average(A) = 50  # average score during all matches ever by this robot
+
+ObserDiff
+
+ObserDev #from average
+	-> you helped other team
+	-> other 
+
+
+10 =   Average(A) - Score(M23, AB) = ObservDev(M23, AB)
+.1 =   1/(Score(M23,AB) - Score(M23,CD)) = ObservDiff(M23)
+10.1 = Dev + Diff  # from above
+1 =    rankDiff(AB,CD)
+10.1 * 1  = (Dev + Diff) * 1/rankDiff = 10.1
+
+10.1 = constant = how much AB helped CD by
+
+lower than average, were scoring for the other team
+
+AB +AE +AY /6= av = 50 = Aavg
+
+AB, 40 
+CD, 30
+
+|{(Aavg - AB) + (1/(sw - sl))} (r1c - r2c)| = C
+
+|{(Aavg - AB) + (1/(sw - sl))} (1/(r1c - r2c))| = C
+
+|{(50 - 40) + (1/(40 - 30))} (56 - 41) = c
