@@ -7,43 +7,79 @@
 
 <body>
  <h1>Welcome to Grammatica!</h1>
- <h3 id="declension"></h3>
- <input type="text" id="in"><br>
- <input type="text" id="out"><br>
- <input type="button" value="Boom!" id="boom">
+ <h3 id="case"></h3>
+ <h3 id="number"></h3>
+ <h3 id="prompt"></h3>
+ <input type="text" id="userInput"><br>
+ <input type="button" value="Enter" id="enter">
 
 <script type="text/javascript">
-var declensions = ['Nominative', 'Genetive', 'Dative', 'Accusative', 'Ablative']
-
-var nous = ['domus', 'unus', 'animus'];
+var cases = ['Nominative', 'Genetive', 'Dative', 'Accusative', 'Ablative']
+var numbers = ['Singular', 'Plural'];
+var nouns = ['domus', 'unus', 'animus'];
 // save current declension in a var
-var declension = ...
-$("#declension").html(declensions[Math.floor(Math.random()*5)]);
+// var declension = ...
+$("#case").html(cases[Math.floor(Math.random()*5)]);
+$("#number").html(numbers[Math.floor(Math.random()*2)]);
+$("#prompt").html(nouns[Math.floor(Math.random()*3)]);
 
-$( "#boom").click(function() {
-    for (var i = 0; i < declensions.length; i++){
-        // console.log(declensions[i]);
-    }
-
-    // take a random verb from a dictionary nouns and stick it into a div
-    var indata = $("#in").val();
-    var stem = indata.slice(0,indata.lastIndexOf("us"));
-    // take saved declension, declense the verb, stick it into another var and compare to second field
-    if ($("#out").val() == decline(noun, declension)) {
-        console.log("Correct!");
+var prompt = $("#prompt").text();
+var whichNumber = $("#number").text();
+var whichCase = $("#case").text();
+    //var stem = stem(indata);
+var stem = stem(prompt);
+// console.log(stem);
+$("#enter").click(function() {
+    if ($("#userInput").val() == decline(prompt, whichCase, whichNumber, 1)) {
+        alert("Correct!");
     } else {
-        console.log("Wrong!");
+        alert("Wrong!");
     }
 });
 
-function decline(noun, declension){
-
-    return declinedNoun;
+function decline(noun, whichCase, whichNumber, declension){
+    if (declension == 1) {
+        if (whichNumber = 'Singular') {
+            if (whichCase == 'Nominative') {
+                return stem(noun, 1) + 'us';
+            } 
+            else if (whichCase == 'Genetive') {
+                return stem(noun, 1) + 'i';
+            } 
+            else if (whichCase == 'Dative') {
+                return stem(noun, 1) + 'o';
+            }
+            else if (whichCase == 'Accusative') {
+                return stem(noun, 1) + 'um';
+            }
+            else if (whichCase == 'Ablative') {
+                return stem(noun, 1) + 'o';
+            }
+        }
+        else if (whichNumber = 'Plural') {
+            if (whichCase == 'Nominative') {
+                return stem(noun, 1) + 'i';
+            } 
+            else if (whichCase == 'Genetive') {
+                return stem(noun, 1) + 'orum';
+            } 
+            else if (whichCase == 'Dative') {
+                return stem(noun, 1) + 'is';
+            }
+            else if (whichCase == 'Accusative') {
+                return stem(noun, 1) + 'os';
+            }
+            else if (whichCase == 'Ablative') {
+                return stem(noun, 1) + 'is';
+            }
+        }
+    }
 };
 
-function stem(noun){
-
-    return stem;
+function stem(noun, declension){
+    if (declension == 1) {
+        return noun.substring(0,noun.lastIndexOf("us"));
+    }
 };
 </script>
 </body>
