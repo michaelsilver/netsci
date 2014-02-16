@@ -371,9 +371,7 @@ $("#userInput").keypress(function(event){
 });
 
 function whichDeclension(dictDef) {
-    while (promt.indexOf(',') != null) {
-        prompt = promt.substring(0, promt.indexOf(',') - 1) + promt.substring(0, promt.indexOf(',') + 1);
-    }
+    prompt = prompt.replace(/,/g,'');
 }
 
 function stem(noun, declension){
