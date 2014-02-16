@@ -1,0 +1,4 @@
+
+// TODO - put all this logic into functions, have button to 'reset' if correct, ask again if fail.
+// TODO - get rid of alerts, make green and red divs appear on check
+// Keep track of correct/incorrect answers.
