@@ -354,6 +354,7 @@ $("#prompt").html(nouns[Math.floor(Math.random()*3)]);
 var prompt = $("#prompt").text();
 var whichNumber = $("#number").text().toLowerCase();
 var whichCase = $("#case").text().toLowerCase();
+// var whichDeclension
     //var stem = stem(indata);
 // console.log(stem);
 $("#enter").click(function(){
@@ -369,27 +370,33 @@ $("#userInput").keypress(function(event){
     // event.stopPropagation();
 });
 
+function whichDeclension(dictDef) {
+    while (promt.indexOf(',') != null) {
+        prompt = promt.substring(0, promt.indexOf(',') - 1) + promt.substring(0, promt.indexOf(',') + 1);
+    }
+}
+
 function stem(noun, declension){
-    if (declension == 1) {
+    if (declension == '1') {
         return noun.substring(0,noun.lastIndexOf('us'));
     }
     // modify for new term format
 };
 
 function decline(noun, whichCase, whichNumber, declension){
-    if (declension == 1) {
-        return stem(noun, 1) + nounEndings[declension][whichNumber][whichCase];
+    if (declension == '1') {
+        return stem(noun, '1') + nounEndings[declension][whichNumber][whichCase];
     }
 };
 
 function checkAnswer(){
-    if ($("#userInput").val() == decline(prompt, whichCase, whichNumber, 1)) {
+    if ($("#userInput").val() == decline(prompt, whichCase, whichNumber, whichDeclension(prompt))) {
         alert("Correct!");
     } else {
         alert("Wrong!");
     }
     console.log(prompt, whichCase, whichNumber);
-    console.log(decline(prompt, whichCase, whichNumber, 1))
+    console.log(decline(prompt, whichCase, whichNumber, '1'))
 };
 
 
