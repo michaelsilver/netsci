@@ -1,4 +1,4 @@
-var quizletSet =
+quizletSet =
 {
      "terms": [
             {

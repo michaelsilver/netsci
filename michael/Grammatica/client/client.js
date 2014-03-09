@@ -1,9 +1,9 @@
-// make a gien webpage element updatable
 function exposeSessionVar(template, varName){
 	template[varName] = function(){
 		return Session.get(varName);
 	};
 };
+// make a gien webpage element updatable
 
 // pick a random element of an array
 function pickRandomFromArray(array){
@@ -16,11 +16,16 @@ function pickRandomFromArray(array){
 var cases =   ['Nominative', 'Genetive', 'Dative', 'Accusative', 'Ablative']
 var numbers = ['Plural', 'Singular'];
 
-function Prompt(pPart, species){
+var promptedDictEntry;
+var promptedNumber;
+var promptedCase;
+
+function Prompt(kingdom, species, pPart){
 	// pPart are the principle parts
 	// species is the declention if a noun, the verb type (1,2,3,3i, etc.) if verb
+	this.kingdom = kingdom; // noun or verb
+	this.species = species;
 	this.pPart = pPart;
-	this.declention = declention;
 }
 
 ////////////
@@ -34,6 +39,13 @@ exposeSessionVar(Template.main, 'userCorrect');
 ////////////
 
 // on webpage load, show a random case, number, and noun
+
+function promptUser(case_, number, dictEntry){
+	Session.set('userCase', case_);
+	Session.set('userNumber', number);
+	Session.set('userPrompt', dictEntry);
+}
+
 Meteor.startup(function(){
 	promptUser(
 		pickRandomFromArray(cases),
@@ -54,12 +66,6 @@ Template.main.events({
 	}
 });
 
-function promptUser(case_, number, dictEntry){
-	Session.set('userCase', case_);
-	Session.set('userNumber', number);
-	Session.set('userPrompt', dictEntry);
-}
-
 function getNumber(){
 	return Session.get('userNumber').toLowerCase();
 }
@@ -70,21 +76,21 @@ function getPrompt(){
 	return Session.get('userPrompt').toLowerCase();
 }
 
-tempPrompt = getPrompt() // temp prompt is the temporary Prompt that will be cleaned up
-tempPrompt = tempPrompt.replace(/[^a-zA-Z0-9-\s]/g,''); // gets rid of anything but alphaneum,dash,whitespace
-tempPrompt = tempPrompt.replace(/\s/g,' '); // replaces whitespace with one space
+var tempPrompt = getPrompt(); // temp prompt is the temporary Prompt that will be cleaned up
+tempPrompt = tempPrompt.replace(/[^a-zA-Z0-9-\s]+/g,''); // gets rid of anything but alphaneum,dash,whitespace
+tempPrompt = tempPrompt.replace(/\s+/g,' '); // replaces whitespace with one space
 
-tempPrompt = tempPrompt.replace(/^\s/g,'');
-tempPrompt = tempPrompt.replace(/\s$/g,''); 
+tempPrompt = tempPrompt.replace(/^\s+/g,'');
+tempPrompt = tempPrompt.replace(/\s+$/g,''); 
 // gets rid of possible beginning and end whitespaces
 
 tempPPart = new Array();
 tempPPart = tempPrompt.split(' '); 
 // splits the temp prompt according to spaces
 
-prompt = new Prompt // creates promp object in Prompt class
-prompt.pPart = tempPPart // adds the principle parts as an array pPart as a property of prompt
-
+var prompt = new Prompt; // creates promp object in Prompt class
+prompt.pPart = tempPPart; // adds the principle parts as an array pPart as a property of prompt
+console.log(prompt.pPart);
 // check if noun
 
 // check if first declention
