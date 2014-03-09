@@ -1,19 +1,31 @@
+// make a gien webpage element updatable
 function exposeSessionVar(template, varName){
 	template[varName] = function(){
 		return Session.get(varName);
 	};
 };
+
+// pick a random element of an array
 function pickRandomFromArray(array){
 	return array[Math.floor(Math.random() * array.length)];
 }
 
 ////////////
 
+// possible cases and numbers
 var cases =   ['Nominative', 'Genetive', 'Dative', 'Accusative', 'Ablative']
 var numbers = ['Plural', 'Singular'];
 
+function Prompt(pPart, species){
+	// pPart are the principle parts
+	// species is the declention if a noun, the verb type (1,2,3,3i, etc.) if verb
+	this.pPart = pPart;
+	this.declention = declention;
+}
+
 ////////////
 
+// makes these webpage elements updatable
 exposeSessionVar(Template.main, 'userCase');
 exposeSessionVar(Template.main, 'userNumber');
 exposeSessionVar(Template.main, 'userPrompt');
@@ -21,17 +33,18 @@ exposeSessionVar(Template.main, 'userCorrect');
 
 ////////////
 
+// on webpage load, show a random case, number, and noun
 Meteor.startup(function(){
-	prompt(
+	promptUser(
 		pickRandomFromArray(cases),
 		pickRandomFromArray(numbers),
-		pickRandomFromArray(nouns)
+		pickRandomFromArray(quizletSet.terms).term
 	);
 });
 
 Template.main.events({
 	'click #enter':function(){
-		handleSubmit();
+		handleSubmit(); // make a function for handle submit
 	},
 	'keypress input': function (evt) {
 		Session.set('userCorrect', '');
@@ -41,10 +54,10 @@ Template.main.events({
 	}
 });
 
-function prompt(case_, number, prompt){
+function promptUser(case_, number, dictEntry){
 	Session.set('userCase', case_);
 	Session.set('userNumber', number);
-	Session.set('userPrompt', prompt);
+	Session.set('userPrompt', dictEntry);
 }
 
 function getNumber(){
@@ -57,55 +70,99 @@ function getPrompt(){
 	return Session.get('userPrompt').toLowerCase();
 }
 
-function handleSubmit(){
-	var answer = $('#userInput').val().toLowerCase();
+tempPrompt = getPrompt() // temp prompt is the temporary Prompt that will be cleaned up
+tempPrompt = tempPrompt.replace(/[^a-zA-Z0-9-\s]/g,''); // gets rid of anything but alphaneum,dash,whitespace
+tempPrompt = tempPrompt.replace(/\s/g,' '); // replaces whitespace with one space
+
+tempPrompt = tempPrompt.replace(/^\s/g,'');
+tempPrompt = tempPrompt.replace(/\s$/g,''); 
+// gets rid of possible beginning and end whitespaces
+
+tempPPart = new Array();
+tempPPart = tempPrompt.split(' '); 
+// splits the temp prompt according to spaces
+
+prompt = new Prompt // creates promp object in Prompt class
+prompt.pPart = tempPPart // adds the principle parts as an array pPart as a property of prompt
+
+// check if noun
+
+// check if first declention
+// check if second declention
+// check if third declention
+// check if fourth declention
+// check if fifth declention
+
+// if not any of these, check if verb
+
+
+
+
+
+
+
+
+
+
+/////////////////////////////////////////////////////////////////////////
+// function handleSubmit(){
+// 	var answer = $('#userInput').val().toLowerCase();
 	
-    if (checkAnswer(answer, getNumber(), getCase(), getPrompt())) {
-    	console.log('correct');
-        Session.set('userCorrect', 'RIGHT!');
-    } else {
-    	console.log('wrong');
-        Session.set('userCorrect', 'WRONG!');
-    }
-}
+//     if (checkAnswer(answer, getNumber(), getCase(), getPrompt())) {
+//     	console.log('correct');
+//         Session.set('userCorrect', 'RIGHT!');
+//     } else {
+//     	console.log('wrong');
+//         Session.set('userCorrect', 'WRONG!');
+//     }
+// }
 
-////////////////
+// ////////////////
 
-function checkAnswer(answer, number, case_, prompt){
-	console.log(answer, number, case_, prompt);
-	return answer == 'green';
-}
+// function checkAnswer(answer, number, case_, prompt){
+// 	console.log(answer, number, case_, prompt);
+// 	return answer == 'green';
+// }
 
-function getDeclension(noun) {
-    prompt = prompt.replace(/,/g,'');
-    //TODO: parse dictionary defintion. Remove commas, and separete by spaces (split).
-}
+// function getDeclension(prompt) {
+//     nounEntry = nounEntry.replace(/,/g,'');
+//     nounEntry = nounEntry.replace(/./g,'');
+//     nounEntry = nounEntry.replace(/\s/g,' ');
+//     nounEntry = nounEntry.replace(/^\s/g,'');
+//     nounEntry = nounEntry.replace(/\s$/g,'');
+//     nounEntryPPart = new Array();
+//     nounEntryPPart = nounEntry.split(' ');
+//     prompt = new Prompt
+//     prompt.pPart = nounEntryPPart
 
-function stem(noun, declension){
-	//TODO implement
-    if (declension == '1') {
-        return noun.substring(0,noun.lastIndexOf('us'));
-    }
-    // modify for new term format
-};
+//     //parses dictionary defintion. Removes commas, and separetes by spaces (split).
+// }
 
-function decline(noun, whichCase, whichNumber, declension){
-    if (declension == '1') {
-        return stem(noun, '1') + nounEndings[declension][whichNumber][whichCase];
-    }
-    //TODO implement
-};
+// function stem(noun, declension){
+// 	//TODO implement
+//     if (declension == '1') {
+//         return noun.substring(0,noun.lastIndexOf('us'));
+//     }
+//     // modify for new term format
+// };
+
+// function decline(noun, whichCase, whichNumber, declension){
+//     if (declension == '1') {
+//         return stem(noun, '1') + nounEndings[declension][whichNumber][whichCase];
+//     }
+//     //TODO implement
+// };
 
 
-// // console.log(nounEndings['Nominative']);
-// // $.ajax({
-// //     url: 'https://api.quizlet.com/2.0/users/frenchmichel/sets?client_id=BzBNnKHpmx',
-// //     type: "GET",
-// //     beforeSend: function(xhr){xhr.setRequestHeader('Content-type', 'text/json')},
-// //     success: function(data){
-// //         console.log(data);
-// //     }
-// // });
+// console.log(nounEndings['Nominative']);
+// $.ajax({
+//     url: 'https://api.quizlet.com/2.0/users/frenchmichel/sets?client_id=BzBNnKHpmx',
+//     type: "GET",
+//     beforeSend: function(xhr){xhr.setRequestHeader('Content-type', 'text/json')},
+//     success: function(data){
+//         console.log(data);
+//     }
+// });
 
 
 // $.ajax({
