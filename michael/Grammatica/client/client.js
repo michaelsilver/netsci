@@ -66,31 +66,38 @@ Template.main.events({
 	}
 });
 
-function getNumber(){
-	return Session.get('userNumber').toLowerCase();
-}
-function getCase(){
-	return Session.get('userCase').toLowerCase();
-}
-function getPrompt(){
-	return Session.get('userPrompt').toLowerCase();
-}
+// function getNumber(){
+// 	return Session.get('userNumber').toLowerCase();
+// }
+// function getCase(){
+// 	return Session.get('userCase').toLowerCase();
+// }
+// function getPrompt(){
+// 	return Session.get('userPrompt').toLowerCase();
+// }
 
-var tempPrompt = getPrompt(); // temp prompt is the temporary Prompt that will be cleaned up
-tempPrompt = tempPrompt.replace(/[^a-zA-Z0-9-\s]+/g,''); // gets rid of anything but alphaneum,dash,whitespace
-tempPrompt = tempPrompt.replace(/\s+/g,' '); // replaces whitespace with one space
 
-tempPrompt = tempPrompt.replace(/^\s+/g,'');
-tempPrompt = tempPrompt.replace(/\s+$/g,''); 
+promptedDictEntry = Session.get('userPrompt').toLowerCase();
+promptedNumber = Session.get('userNumber').toLowerCase();
+promptedCase = Session.get('userCase').toLowerCase();
+
+
+promptedDictEntry = promptedDictEntry.replace(/[^a-zA-Z0-9-\s]+/g,''); // gets rid of anything but alphaneum,dash,whitespace
+promptedDictEntry = promptedDictEntry.replace(/\s+/g,' '); // replaces whitespace with one space
+
+promptedDictEntry = promptedDictEntry.replace(/^\s+/g,'');
+promptedDictEntry = promptedDictEntry.replace(/\s+$/g,''); 
 // gets rid of possible beginning and end whitespaces
 
+
 tempPPart = new Array();
-tempPPart = tempPrompt.split(' '); 
+tempPPart = promptedDictEntry.split(' '); 
 // splits the temp prompt according to spaces
 
 var prompt = new Prompt; // creates promp object in Prompt class
 prompt.pPart = tempPPart; // adds the principle parts as an array pPart as a property of prompt
 console.log(prompt.pPart);
+
 // check if noun
 
 // check if first declention
