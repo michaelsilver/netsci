@@ -231,3 +231,18 @@ var nounEndings =
             },
         },
     }
+
+declensionByGenitiveSingulars = _.chain(nounEndings)
+    .pluck('singular')
+    .pluck('genitive')
+    .zip(_.keys(nounEndings))
+    .object()
+    .value();
+
+_.each(_.keys(declensionByGenitiveSingulars), function(key){
+    declensionByGenitiveSingulars[key] = declensionByGenitiveSingulars[key][0]
+});
+
+console.log(
+    declensionByGenitiveSingulars
+);

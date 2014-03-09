@@ -66,40 +66,30 @@ Template.main.events({
 	}
 });
 
-// function getNumber(){
-// 	return Session.get('userNumber').toLowerCase();
-// }
-// function getCase(){
-// 	return Session.get('userCase').toLowerCase();
-// }
-// function getPrompt(){
-// 	return Session.get('userPrompt').toLowerCase();
-// }
+function getNumber(){
+	return Session.get('userNumber').toLowerCase();
+}
+function getCase(){
+	return Session.get('userCase').toLowerCase();
+}
+function getPrompt(){
+	return Session.get('userPrompt').toLowerCase();
+}
 
-
-promptedDictEntry = Session.get('userPrompt').toLowerCase();
-promptedNumber = Session.get('userNumber').toLowerCase();
-promptedCase = Session.get('userCase').toLowerCase();
-
-
-promptedDictEntry = promptedDictEntry.replace(/[^a-zA-Z0-9-\s]+/g,''); // gets rid of anything but alphaneum,dash,whitespace
-promptedDictEntry = promptedDictEntry.replace(/\s+/g,' '); // replaces whitespace with one space
-
-promptedDictEntry = promptedDictEntry.replace(/^\s+/g,'');
-promptedDictEntry = promptedDictEntry.replace(/\s+$/g,''); 
 // gets rid of possible beginning and end whitespaces
 
 
-tempPPart = new Array();
-tempPPart = promptedDictEntry.split(' '); 
-// splits the temp prompt according to spaces
+//////////////
+// new things:
 
-var prompt = new Prompt; // creates promp object in Prompt class
-prompt.pPart = tempPPart; // adds the principle parts as an array pPart as a property of prompt
-console.log(prompt.pPart);
-
+// lkajsdfa
 // check if noun
+// function declentionOf(principleParts) {
+// 	if (principleParts[0].lastIndexOf('us') == principleParts[0].length - 2)
 
+// }
+
+// function endsIn(s)
 // check if first declention
 // check if second declention
 // check if third declention
@@ -108,35 +98,74 @@ console.log(prompt.pPart);
 
 // if not any of these, check if verb
 
+// end of new things
+///////////////
 
 
 
 
 
 
-
+Meteor.startup(function(){
+	checkAnswer('philosophus', 'singular', 'nominative', 'philosophus, -i m.');
+});
 
 
 /////////////////////////////////////////////////////////////////////////
-// function handleSubmit(){
-// 	var answer = $('#userInput').val().toLowerCase();
+function handleSubmit(){
+	var answer = $('#userInput').val().toLowerCase();
 	
-//     if (checkAnswer(answer, getNumber(), getCase(), getPrompt())) {
-//     	console.log('correct');
-//         Session.set('userCorrect', 'RIGHT!');
-//     } else {
-//     	console.log('wrong');
-//         Session.set('userCorrect', 'WRONG!');
-//     }
-// }
+    if (checkAnswer(answer, getNumber(), getCase(), getPrompt())) {
+    	console.log('correct');
+        Session.set('userCorrect', 'RIGHT!');
+    } else {
+    	console.log('wrong');
+        Session.set('userCorrect', 'WRONG!');
+    }
+}
 
 // ////////////////
 
-// function checkAnswer(answer, number, case_, prompt){
-// 	console.log(answer, number, case_, prompt);
-// 	return answer == 'green';
-// }
+//test if andwer is correct number/case declension of prompt
+function checkAnswer(answer, number, case_, prompt){
+	prompt = normalizeDictEntry(prompt);
+	console.log('normalized prompt:'+prompt);
+	var declension = getDeclension(prompt);
+	console.log(declension);
+	return answer == 'green';
+}
 
+function normalizeDictEntry(dictEntry){
+	dictEntry = dictEntry.replace(/[^a-zA-Z0-9-\s]+/g,''); // gets rid of anything but alphaneum,dash,whitespace
+	dictEntry = dictEntry.replace(/\s+/g,' '); // replaces whitespace with one space
+
+	dictEntry = dictEntry.replace(/^\s+/g,'');
+	dictEntry = dictEntry.replace(/\s+$/g,'');
+	return dictEntry.split(' ');
+}
+
+function getDeclension(dictEntry) {
+	var ret;
+	_.each(_.keys(declensionByGenitiveSingulars), function(key, value){
+		if(endsWith(dictEntry[1], key)){
+			ret = value;
+		}
+	});
+	if(ret){
+		return ret;
+	}else{
+		console.log('unknown 2nd pp in: '+dictEntry);
+		return;
+	}
+}
+
+function endsWith(base, ending){
+	if(base.length >= ending.length){
+		return base.lastIndexOf(ending) == base.length - ending.length;
+	}else{
+		return false;
+	}
+}
 // function getDeclension(prompt) {
 //     nounEntry = nounEntry.replace(/,/g,'');
 //     nounEntry = nounEntry.replace(/./g,'');
