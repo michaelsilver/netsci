@@ -1,0 +1,16 @@
+<head>
+  <title>Grammatica</title>
+</head>
+
+<body>
+	{{> main }}
+</body>
+
+<template name="main">
+	<h1>Welcome to Grammatica!</h1>
+	<h3 id="pronoun">{{userPronoun}}</h3>
+	<h3 id="verb">{{userVerb}}</h3>
+	<input type="text" id="userInput"><br>
+	<input type="button" value="Enter" id="enter">
+	<p>{{userCorrect}}</p>
+</template>
