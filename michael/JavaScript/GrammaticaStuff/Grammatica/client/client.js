@@ -2,7 +2,7 @@ function exposeSessionVar(template, varName){
     template[varName] = function(){
         return Session.get(varName);
     };
-};
+}
 // make a gien webpage element updatable
 
 // pick a random element of an array

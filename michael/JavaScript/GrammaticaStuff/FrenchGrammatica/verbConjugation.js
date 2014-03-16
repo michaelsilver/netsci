@@ -1,4 +1,4 @@
-verbConjugation = 
+verbConjugation =
     {
         'avoir': // these are the actual conjugations
         {
@@ -14,7 +14,7 @@ verbConjugation =
             'je' : 'e',
             'tu' : 'es',
             'il/elle/on' : 'e',
-            'nous' : 'ons', 
+            'nous' : 'ons',
             'vous' : 'ez',
             'ils/elles' : 'ent',
         }
@@ -23,7 +23,7 @@ verbConjugation =
 // verbConjugation = _.chain(verbConjugation).value();
 // console.log(_.keys(verbConjugation).verb.value().keys().pronoun));
 // console.log(_.keys(verbConjugation.value()));
-console.log(verbConjugation.avoir.tu); // this one is fine
+// console.log(verbConjugation.avoir.tu); // this one is fine
 
 // BUT: look at line 53 of client.js
 

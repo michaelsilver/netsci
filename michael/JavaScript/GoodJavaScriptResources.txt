@@ -5,3 +5,6 @@ metior
 mozilla https://developer.mozilla.org/en-US/docs/Web/JavaScript
 
 Sublime text http://www.sublimetext.com/
+
+Good Textbook:
+http://eloquentjavascript.net/contents.html

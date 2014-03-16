@@ -17,7 +17,7 @@ function exposeSessionVar(template, varName){
 	template[varName] = function(){
 		return Session.get(varName);
 	};
-};
+}
 // make a gien webpage element updatable
 
 // pick a random element of an array
@@ -25,8 +25,8 @@ function pickRandomFromArray(array){
 	return array[Math.floor(Math.random() * array.length)];
 }
 
-var pronouns =   ["je (j')", 'tu', 'il', 'elle', 'on', 'nous', 'vous', 'ils', 'elles']
-var verbs = ['avoir']
+var pronouns =   ['je', 'tu', 'il', 'elle', 'on', 'nous', 'vous', 'ils', 'elles'];
+var verbs = ['avoir'];
 
 // makes these webpage elements updatable
 exposeSessionVar(Template.main, 'userPronoun');
@@ -42,6 +42,10 @@ function setPrompts(pronoun, verb){
 }
 
 function promptUser(){
+	$('#userInput').val('');
+	Session.set('theActualAnswer', '');
+	Session.set('userCorrect', '');
+	// clears everything but the prompts
 	setPrompts(
 		pickRandomFromArray(pronouns),
 		pickRandomFromArray(verbs)
@@ -51,7 +55,6 @@ function promptUser(){
 Meteor.startup(function(){
 	promptUser();
 	// console.log(verbConjugation.avoir.tu); // this one gets an ERROR : Uncaught ReferenceError: verbConjugation is not defined 
-	console.log
 });
 
 Template.main.events({
@@ -60,9 +63,9 @@ Template.main.events({
 	},
 	'keypress input': function (evt) {
 		Session.set('userCorrect', '');
-	    if (evt.which === 13) {
+		if (evt.which === 13) {
 			handleSubmit();
-	    }
+		}
 	}
 });
 
@@ -75,30 +78,38 @@ function getVerb(){
 
 function handleSubmit(){
 	var answer = $('#userInput').val().toLowerCase();
-	
-    if (answer == correctAnswer(getPronoun(), getVerb())) {
-        Session.set('userCorrect', 'RIGHT!');
-        $('#userInput').val(''); // hoping this clears the text area. What is the proper way to clear the text area?
-        promptUser();
-        Session.set('theActualAnswer', '');
-        Session.set('userCorrect', '');
-    } else {
-        Session.set('userCorrect', 'WRONG!');
-        Session.set('theActualAnswer', correctAnswer(getPronoun(), getVerb()));
-    }
+	answer.replace(/\s+/g, ' ');
+	answer.replace(/^\s*/, '');
+	answer.replace(/\s*$/, '');
+	if (answer == (correctAnswer(getPronoun(), getVerb()))) {
+		// Session.set('userCorrect', 'RIGHT!');
+		// $('#userInput').val(''); // hoping this clears the text area. What is the proper way to clear the text area?
+		// clearAllButPrompts();
+		promptUser();
+		// Session.set('theActualAnswer', '');
+		// Session.set('userCorrect', '');
+	} else {
+		Session.set('userCorrect', 'WRONG!');
+		Session.set('theActualAnswer', correctAnswer(getPronoun(), getVerb()));
+	}
 }
+
+// function clearAllButPrompts(){
+// $('#userInput').val('');
+// Session.set('theActualAnswer', '');
+// Session.set('userCorrect', '');
+// }
 
 function correctAnswer(pronoun, verb){
 	if (pronoun == 'je' && firstLetterIsVowel(verbConjugation[verb][pronoun])){
-	// if (pronoun == 'je' && firstLetterIsVowel(_.keys(verbConjugation).verb.value().keys().pronoun)){
 		return "j'" + verbConjugation[verb][pronoun];
 	} else if (pronoun == 'il' || pronoun == 'elle' || pronoun == 'on'){
 		return pronoun + ' ' + verbConjugation[verb]['il/elle/on'];
 	} else if (pronoun == 'ils' || pronoun == 'elles'){
 		return pronoun + ' ' + verbConjugation[verb]['ils/elles'];
-	} else return pronoun + verbConjugation[verb][pronoun];
+	} else return pronoun + ' ' + verbConjugation[verb][pronoun];
 }
 
 function firstLetterIsVowel(word){
-	return word.charAt(0) == /[aeiou]/;
+	return (/[aeiou]/).test(word.charAt(0));
 }
