@@ -21,3 +21,6 @@ var verbConjugation =
     };
 
 // verbConjugation = _.chain(verbConjugation).value();
+// console.log(_.keys(verbConjugation).verb.value().keys().pronoun));
+// console.log(_.keys(verbConjugation.value()));
+// console.log(verbConjugation.avoir.tu);

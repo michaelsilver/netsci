@@ -35,23 +35,28 @@ exposeSessionVar(Template.main, 'userCase');
 exposeSessionVar(Template.main, 'userNumber');
 exposeSessionVar(Template.main, 'userPrompt');
 exposeSessionVar(Template.main, 'userCorrect');
+exposeSessionVar(Template.main, 'theActualAnswer');
 
 ////////////
 
 // on webpage load, show a random case, number, and noun
 
-function promptUser(case_, number, dictEntry){
+function setPrompts(case_, number, dictEntry){
 	Session.set('userCase', case_);
 	Session.set('userNumber', number);
 	Session.set('userPrompt', dictEntry);
 }
-
-Meteor.startup(function(){
-	promptUser(
+function promptUser(){
+	setPrompts(
 		pickRandomFromArray(cases),
 		pickRandomFromArray(numbers),
 		pickRandomFromArray(quizletSet.terms).term
 	);
+}
+
+Meteor.startup(function(){
+	promptUser();
+	// console.log(getDeclension(getPrompt()));
 });
 
 Template.main.events({
@@ -77,32 +82,37 @@ function getPrompt(){
 }
 
 // Meteor.startup(function(){
-// 	checkAnswer('philosophus', 'singular', 'nominative', 'philosophus, -i m.');
+// 	correctAnswer('philosophus', 'singular', 'nominative', 'philosophus, -i m.');
 // });
 
-
+ 
 /////////////////////////////////////////////////////////////////////////
 function handleSubmit(){
 	var answer = $('#userInput').val().toLowerCase();
 	
-    if (checkAnswer(answer, getNumber(), getCase(), getPrompt())) {
-    	console.log('correct');
+    if (answer == correctAnswer(getCase(), getNumber(), getPrompt())){
+    	// console.log('correct');
         Session.set('userCorrect', 'RIGHT!');
+        $('#userInput').val(''); // hoping this clears the text area. What is the proper way to clear the text area?
+        promptUser();
+        Session.set('theActualAnswer', '');
+        Session.set('userCorrect', '');
     } else {
-    	console.log('wrong');
+    	// console.log('wrong');
         Session.set('userCorrect', 'WRONG!');
+        Session.set('theActualAnswer', correctAnswer(getCase(), getNumber(), getPrompt()));
     }
 }
 
 // ////////////////
 
 //test if andwer is correct number/case declension of prompt
-function checkAnswer(answer, number, case_, prompt){
-	prompt = normalizeDictEntry(prompt);
-	console.log('normalized prompt:' + prompt); // ERROR: prompt is not getting updated every time the page reloads
+function correctAnswer(case_, number, prompt){
+	// prompt = normalizeDictEntry(prompt);
+	// console.log('normalized prompt:' + prompt);
 	var declension = getDeclension(prompt);
-	console.log(declension); // ERROR: declension is not getting updated when the page reloads
-	return answer == 'green';
+	// console.log(declension); 
+	return 'green'; // sanity test
 }
 
 function normalizeDictEntry(dictEntry){
@@ -115,6 +125,8 @@ function normalizeDictEntry(dictEntry){
 }
 
 function getDeclension(dictEntry) {
+	dictEntry = normalizeDictEntry(dictEntry);
+	console.log(dictEntry);
 	var ret;
 	_.each(_.keys(declensionByGenitiveSingulars), function(key, value){
 		if(endsWith(dictEntry[1], key)){
@@ -122,7 +134,7 @@ function getDeclension(dictEntry) {
 		}
 	});
 	if(ret){
-		return ret;
+		return ret + 1;
 	}else{
 		console.log('unknown 2nd pp in: ' + dictEntry);
 		return;

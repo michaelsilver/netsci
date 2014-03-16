@@ -41,7 +41,7 @@ function setPrompts(pronoun, verb){
 	Session.set('userVerb', verb);
 }
 
-function promptUser() {
+function promptUser(){
 	setPrompts(
 		pickRandomFromArray(pronouns),
 		pickRandomFromArray(verbs)
@@ -89,6 +89,7 @@ function handleSubmit(){
 
 function correctAnswer(pronoun, verb){
 	if (pronoun == 'je' && firstLetterIsVowel(verbConjugation.verb.pronoun)){
+	// if (pronoun == 'je' && firstLetterIsVowel(_.keys(verbConjugation).verb.value().keys().pronoun)){
 		return "j'" + verbConjugation.verb.pronoun;
 	} else if (pronoun == 'il' || pronoun == 'elle' || pronoun == 'on'){
 		return pronoun + ' ' + verbConjugation.verb.il/elle/on;
