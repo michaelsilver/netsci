@@ -137,7 +137,16 @@ function getDeclension(dictEntry) {
 		return ret + 1;
 	}else{
 		console.log('unknown 2nd pp in: ' + dictEntry);
+		_.without(quizletSet.terms, quizletSet.terms[findIndexOfThatHas(quizletSet.terms, dictEntry)])
+		promptUser();
 		return;
+	}
+}
+
+function findIndexOfThatHas(array, key){
+	for(i=0; array.length; i++){
+		if(_.has(array[i], key))
+			return i;
 	}
 }
 
