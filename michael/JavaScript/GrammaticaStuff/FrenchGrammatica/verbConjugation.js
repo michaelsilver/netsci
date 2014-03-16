@@ -1,11 +1,11 @@
-var verbConjugation = 
+verbConjugation = 
     {
         'avoir': // these are the actual conjugations
         {
             'je' : 'ai',
             'tu' : 'as',
             'il/elle/on' : 'a',
-            'nous' : 'avons', 
+            'nous' : 'avons',
             'vous' : 'avez',
             'ils/elles' : 'ont',
         },
@@ -25,4 +25,9 @@ var verbConjugation =
 // console.log(_.keys(verbConjugation.value()));
 console.log(verbConjugation.avoir.tu); // this one is fine
 
-// look at line 53 of client.js
+// BUT: look at line 53 of client.js
+
+
+// function verbConjugation(){
+//     return verbConjugation;
+// }

@@ -50,7 +50,8 @@ function promptUser(){
 
 Meteor.startup(function(){
 	promptUser();
-	console.log(verbConjugation.avoir.tu); // this one gets an ERROR : Uncaught ReferenceError: verbConjugation is not defined 
+	// console.log(verbConjugation.avoir.tu); // this one gets an ERROR : Uncaught ReferenceError: verbConjugation is not defined 
+	console.log
 });
 
 Template.main.events({
@@ -88,14 +89,14 @@ function handleSubmit(){
 }
 
 function correctAnswer(pronoun, verb){
-	if (pronoun == 'je' && firstLetterIsVowel(verbConjugation.verb.pronoun)){
+	if (pronoun == 'je' && firstLetterIsVowel(verbConjugation[verb][pronoun])){
 	// if (pronoun == 'je' && firstLetterIsVowel(_.keys(verbConjugation).verb.value().keys().pronoun)){
-		return "j'" + verbConjugation.verb.pronoun;
+		return "j'" + verbConjugation[verb][pronoun];
 	} else if (pronoun == 'il' || pronoun == 'elle' || pronoun == 'on'){
-		return pronoun + ' ' + verbConjugation.verb.il/elle/on;
+		return pronoun + ' ' + verbConjugation[verb]['il/elle/on'];
 	} else if (pronoun == 'ils' || pronoun == 'elles'){
-		return pronoun + ' ' + verbConjugation.verb.ils/elles;
-	} else return pronoun + verbConjugation.verb.pronoun;
+		return pronoun + ' ' + verbConjugation[verb]['ils/elles'];
+	} else return pronoun + verbConjugation[verb][pronoun];
 }
 
 function firstLetterIsVowel(word){
