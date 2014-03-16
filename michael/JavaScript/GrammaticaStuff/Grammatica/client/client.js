@@ -13,20 +13,20 @@ function pickRandomFromArray(array){
 ////////////
 
 // possible cases and numbers
-var cases =   ['Nominative', 'Genetive', 'Dative', 'Accusative', 'Ablative']
+var cases =   ['Nominative', 'Genitive', 'Dative', 'Accusative', 'Ablative']
 var numbers = ['Plural', 'Singular'];
 
 var promptedDictEntry;
 var promptedNumber;
 var promptedCase;
 
-function Prompt(kingdom, species, pPart){
-	// pPart are the principle parts
-	// species is the declention if a noun, the verb type (1,2,3,3i, etc.) if verb
-	this.kingdom = kingdom; // noun or verb
-	this.species = species;
-	this.pPart = pPart;
-}
+// function Prompt(kingdom, species, pPart){
+// 	// pPart are the principle parts
+// 	// species is the declention if a noun, the verb type (1,2,3,3i, etc.) if verb
+// 	this.kingdom = kingdom; // noun or verb
+// 	this.species = species;
+// 	this.pPart = pPart;
+// }
 
 ////////////
 
@@ -76,39 +76,9 @@ function getPrompt(){
 	return Session.get('userPrompt').toLowerCase();
 }
 
-// gets rid of possible beginning and end whitespaces
-
-
-//////////////
-// new things:
-
-// lkajsdfa
-// check if noun
-// function declentionOf(principleParts) {
-// 	if (principleParts[0].lastIndexOf('us') == principleParts[0].length - 2)
-
-// }
-
-// function endsIn(s)
-// check if first declention
-// check if second declention
-// check if third declention
-// check if fourth declention
-// check if fifth declention
-
-// if not any of these, check if verb
-
-// end of new things
-///////////////
-
-
-
-
-
-
-Meteor.startup(function(){
-	checkAnswer('philosophus', 'singular', 'nominative', 'philosophus, -i m.');
-});
+// Meteor.startup(function(){
+// 	checkAnswer('philosophus', 'singular', 'nominative', 'philosophus, -i m.');
+// });
 
 
 /////////////////////////////////////////////////////////////////////////
@@ -129,9 +99,9 @@ function handleSubmit(){
 //test if andwer is correct number/case declension of prompt
 function checkAnswer(answer, number, case_, prompt){
 	prompt = normalizeDictEntry(prompt);
-	console.log('normalized prompt:'+prompt);
+	console.log('normalized prompt:' + prompt); // ERROR: prompt is not getting updated every time the page reloads
 	var declension = getDeclension(prompt);
-	console.log(declension);
+	console.log(declension); // ERROR: declension is not getting updated when the page reloads
 	return answer == 'green';
 }
 
@@ -154,7 +124,7 @@ function getDeclension(dictEntry) {
 	if(ret){
 		return ret;
 	}else{
-		console.log('unknown 2nd pp in: '+dictEntry);
+		console.log('unknown 2nd pp in: ' + dictEntry);
 		return;
 	}
 }

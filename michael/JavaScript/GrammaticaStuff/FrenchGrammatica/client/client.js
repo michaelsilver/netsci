@@ -1,3 +1,18 @@
+// var verbConjugation = 
+//     {
+//         'avoir':
+//         {
+//             "je" : 'ai',
+//             'tu' : 'as',
+//             'il/elle/on' : 'a',
+//             'nous' : 'avons', 
+//             'vous' : 'avez',
+//             'ils/elles' : 'ons',
+//         },
+//     };
+
+// var verbConjugation = Assets.getText('verbConjugation.js');
+
 function exposeSessionVar(template, varName){
 	template[varName] = function(){
 		return Session.get(varName);
@@ -78,7 +93,7 @@ function correctAnswer(pronoun, verb){
 	} else if (pronoun == 'il' || pronoun == 'elle' || pronoun == 'on'){
 		return pronoun + ' ' + verbConjugation.verb.il/elle/on;
 	} else if (pronoun == 'ils' || pronoun == 'elles'){
-		return pronoun = ' ' + verbConjugation.verb.ils/elles;
+		return pronoun + ' ' + verbConjugation.verb.ils/elles;
 	} else return pronoun + verbConjugation.verb.pronoun;
 }
 

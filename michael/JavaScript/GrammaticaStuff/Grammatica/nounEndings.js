@@ -246,3 +246,4 @@ _.each(_.keys(declensionByGenitiveSingulars), function(key){
 console.log(
     declensionByGenitiveSingulars
 );
+// console.log(declensionByGenitiveSingulars);
