@@ -50,7 +50,7 @@ function promptUser(){
 
 Meteor.startup(function(){
 	promptUser();
-	// console.log(verbConjugation.avoir.tu);
+	console.log(verbConjugation.avoir.tu); // this one gets an ERROR : Uncaught ReferenceError: verbConjugation is not defined 
 });
 
 Template.main.events({

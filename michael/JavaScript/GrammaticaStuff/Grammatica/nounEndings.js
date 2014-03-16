@@ -232,6 +232,8 @@ var nounEndings =
         },
     }
 
+// we also need to check plurals, because its possible to have a plural only Latin noun
+
 declensionByGenitiveSingulars = _.chain(nounEndings)
     .pluck('singular')
     .pluck('genitive')
@@ -239,11 +241,30 @@ declensionByGenitiveSingulars = _.chain(nounEndings)
     .object()
     .value();
 
+
+//make functions for these
+
 _.each(_.keys(declensionByGenitiveSingulars), function(key){
     declensionByGenitiveSingulars[key] = declensionByGenitiveSingulars[key][0]
 });
 
-console.log(
-    declensionByGenitiveSingulars
-);
+// console.log(
+//     declensionByGenitiveSingulars
+// );
+
+nominativeSingularsByDeclention = _.chain(nounEndings)
+    .pluck('singular')
+    .pluck('nominative')
+    .zip(_.keys(nounEndings))
+    .object()
+    .value();
+
+
+_.each(_.keys(nominativeSingularsByDeclention), function(key){
+    nominativeSingularsByDeclention[key] = nominativeSingularsByDeclention[key][0]
+});
+
+nominativeSingularsByDeclention = _.invert(nominativeSingularsByDeclention);
+
+console.log(nominativeSingularsByDeclention);
 // console.log(declensionByGenitiveSingulars);
