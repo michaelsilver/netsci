@@ -1,1 +1,13 @@
 /* CSS declarations go here */
+
+body{
+	margin-left : 30%;
+}
+
+/*body:not(h1) {
+	margin-left : 35%;
+}*/
+/*
+h1{
+	text-align:center;
+}*/

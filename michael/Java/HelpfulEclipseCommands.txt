@@ -1,0 +1,10 @@
+Eclipse Helpful Commands
+
+Fixing: Command 1
+Completing: Control Space
+Fix Tabs: Command Shift F
+Run: Command R
+
+Eclipse Library References:
+	Processing Library Reference:
+		http://processing.org/reference/javadoc/core/

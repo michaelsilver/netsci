@@ -1,0 +1,3 @@
+Good CSS (and HTML) resources:
+
+http://html.net/tutorials/css/lesson3.php
