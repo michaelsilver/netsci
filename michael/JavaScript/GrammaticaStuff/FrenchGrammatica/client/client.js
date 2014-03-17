@@ -78,9 +78,9 @@ function getVerb(){
 
 function handleSubmit(){
 	var answer = $('#userInput').val().toLowerCase();
-	answer.replace(/\s+/g, ' ');
-	answer.replace(/^\s*/, '');
-	answer.replace(/\s*$/, '');
+	answer = answer.replace(/\s+/g, ' ');
+	answer = answer.replace(/^\s*/, '');
+	answer = answer.replace(/\s*$/, '');
 	if (answer == (correctAnswer(getPronoun(), getVerb()))) {
 		// Session.set('userCorrect', 'RIGHT!');
 		// $('#userInput').val(''); // hoping this clears the text area. What is the proper way to clear the text area?
