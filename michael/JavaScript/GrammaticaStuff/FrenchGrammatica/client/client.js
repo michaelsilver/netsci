@@ -28,6 +28,7 @@ function pickRandomFromArray(array){
 var pronouns =   ['je', 'tu', 'il', 'elle', 'on', 'nous', 'vous', 'ils', 'elles'];
 var verbs = ['avoir'];
 
+
 // makes these webpage elements updatable
 exposeSessionVar(Template.main, 'userPronoun');
 exposeSessionVar(Template.main, 'userVerb');
