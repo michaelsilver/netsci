@@ -2,15 +2,16 @@ verbs =
 	{
 		'irregular':
 		[
-			'avoir'
+			'avoir',
+			'\352tre'
 		],
-		'er verbs':
+		'er': //from https://conjuguemos.com
 		[
 			'accompagner',
 			'aider',
 			'apporter',
 			'chanter',
-			'co&ucircter',
+			'co\373ter',
 			'danser',
 			'fermer',
 			'jouer',
@@ -20,10 +21,23 @@ verbs =
 			'oublier',
 			'passer',
 			'penser',
-			'pr&eacuteparer',
+			'pr\351parer',
 			'raconter',
-			'&eacutecouter',
-			'&eacutetudier'
+			'\351couter',
+			'\351tudier'
+		],
+		're': //from https://conjuguemos.com
+		[
+			'attendre',
+			'descendre',
+			'd\351fendre',
+			'entendre',
+			'interrompre',
+			'perdre',
+			'rendre',
+			'rompre',
+			'r\351pondre',
+			'vendre'
 		]
 	};
 

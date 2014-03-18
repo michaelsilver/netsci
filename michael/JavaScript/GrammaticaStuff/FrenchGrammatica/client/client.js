@@ -1,18 +1,3 @@
-// var verbConjugation = 
-//     {
-//         'avoir':
-//         {
-//             "je" : 'ai',
-//             'tu' : 'as',
-//             'il/elle/on' : 'a',
-//             'nous' : 'avons', 
-//             'vous' : 'avez',
-//             'ils/elles' : 'ons',
-//         },
-//     };
-
-// var verbConjugation = Assets.getText('verbConjugation.js');
-
 function exposeSessionVar(template, varName){
 	template[varName] = function(){
 		return Session.get(varName);
@@ -26,8 +11,7 @@ function pickRandomFromArray(array){
 }
 
 var pronouns =   ['je', 'tu', 'il', 'elle', 'on', 'nous', 'vous', 'ils', 'elles'];
-var verbs = ['avoir'];
-
+var typeOfPromptedVerb; // the type of verb prompted
 
 // makes these webpage elements updatable
 exposeSessionVar(Template.main, 'userPronoun');
@@ -49,13 +33,19 @@ function promptUser(){
 	// clears everything but the prompts
 	setPrompts(
 		pickRandomFromArray(pronouns),
-		pickRandomFromArray(verbs)
+		pickVerb()
 	);
+}
+
+function pickVerb(){ // eventually accept choices
+	var verbTypes = _.keys(verbs);
+	typeOfPromptedVerb = pickRandomFromArray(verbTypes);
+
+	return pickRandomFromArray(verbs[typeOfPromptedVerb]);
 }
 
 Meteor.startup(function(){
 	promptUser();
-	// console.log(verbConjugation.avoir.tu); // this one gets an ERROR : Uncaught ReferenceError: verbConjugation is not defined 
 });
 
 Template.main.events({
@@ -83,33 +73,40 @@ function handleSubmit(){
 	answer = answer.replace(/^\s*/, '');
 	answer = answer.replace(/\s*$/, '');
 	if (answer == (correctAnswer(getPronoun(), getVerb()))) {
-		// Session.set('userCorrect', 'RIGHT!');
-		// $('#userInput').val(''); // hoping this clears the text area. What is the proper way to clear the text area?
-		// clearAllButPrompts();
 		promptUser();
-		// Session.set('theActualAnswer', '');
-		// Session.set('userCorrect', '');
 	} else {
 		Session.set('userCorrect', 'WRONG!');
 		Session.set('theActualAnswer', correctAnswer(getPronoun(), getVerb()));
 	}
 }
 
-// function clearAllButPrompts(){
-// $('#userInput').val('');
-// Session.set('theActualAnswer', '');
-// Session.set('userCorrect', '');
-// }
-
 function correctAnswer(pronoun, verb){
-	if (pronoun == 'je' && firstLetterIsVowel(verbConjugation[verb][pronoun])){
-		return "j'" + verbConjugation[verb][pronoun];
+	var stem;
+	if (typeOfPromptedVerb == 'irregular'){
+		stem = '';
+	} else {
+		stem = verb.slice(0, verb.lastIndexOf(typeOfPromptedVerb));
+		verb = typeOfPromptedVerb;
+	}
+
+	if (pronoun == 'je' && firstLetterIsVowel(getVerb())){
+		return "j'" + stem + verbConjugation[verb][pronoun];
 	} else if (pronoun == 'il' || pronoun == 'elle' || pronoun == 'on'){
-		return pronoun + ' ' + verbConjugation[verb]['il/elle/on'];
+		return pronoun + ' ' + stem + verbConjugation[verb]['il/elle/on'];
 	} else if (pronoun == 'ils' || pronoun == 'elles'){
-		return pronoun + ' ' + verbConjugation[verb]['ils/elles'];
-	} else return pronoun + ' ' + verbConjugation[verb][pronoun];
+		return pronoun + ' ' + stem + verbConjugation[verb]['ils/elles'];
+	} else return pronoun + ' ' + stem + verbConjugation[verb][pronoun];
 }
+
+// UTILITIES:
+
+// function endsWith(base, ending){
+//     if(base.length >= ending.length){
+//         return base.lastIndexOf(ending) == base.length - ending.length;
+//     }else{
+//         return false;
+//     }
+// }
 
 function firstLetterIsVowel(word){
 	return (/[aeiou]/).test(word.charAt(0));

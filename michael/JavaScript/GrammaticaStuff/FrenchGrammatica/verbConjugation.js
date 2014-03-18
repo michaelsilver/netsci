@@ -9,7 +9,16 @@ verbConjugation =
             'vous' : 'avez',
             'ils/elles' : 'ont',
         },
-        'er verbs': // these are only the endings
+        '\352tre':
+        {
+            'je' : 'suis',
+            'tu' : 'es',
+            'il/elle/on' : 'est',
+            'nous' : 'sommes',
+            'vous' : '\352tes',
+            'ils/elles' : 'sont',
+        },
+        'er': // these are only the endings
         {
             'je' : 'e',
             'tu' : 'es',
@@ -17,7 +26,16 @@ verbConjugation =
             'nous' : 'ons',
             'vous' : 'ez',
             'ils/elles' : 'ent',
-        }
+        },
+        're':
+        {
+            'je' : 's',
+            'tu' : 's',
+            'il/elle/on' : '',
+            'nous' : 'ons',
+            'vous' : 'ez',
+            'ils/elles' : 'ent',
+        },
     };
 
 // verbConjugation = _.chain(verbConjugation).value();
