@@ -3,7 +3,7 @@ verbs =
         'irregular':
         [
          'avoir',
-         '\352tre'
+         '\352tre' // \352 = ê, so être
         ],
         'er': //from https://conjuguemos.com
         [
@@ -24,20 +24,29 @@ verbs =
             'pr\351parer', // \351 = é, so préparer
             'raconter',
             '\351couter', // \351 = é, so écouter
-            '\351tudier' // \351 = é, so étudier
+            '\351tudier', // \351 = é, so étudier
+            // verbs from conjuguemos end here
+            'travailler',
+            'manger',
+            'dessiner',
+            'regarder',
+            'parler',
+            'téléphoner'
         ],
         're': //from https://conjuguemos.com
         [
          'attendre',
          'descendre',
-         'd\351fendre',
+         'd\351fendre', // \351 = é, so défendre
          'entendre',
          'interrompre',
          'perdre',
          'rendre',
          'rompre',
-         'r\351pondre',
-         'vendre'
+         'r\351pondre', // \351 = é, so répondre
+         'vendre',
+         // verbs from conjuguemos end here
+         'lire'
         ]
     };
 
