@@ -2,39 +2,39 @@ verbConjugation =
     {
         'avoir': // these are the actual conjugations
         {
-            'je' : 'ai',
-            'tu' : 'as',
+            'je'         : 'ai',
+            'tu'         : 'as',
             'il/elle/on' : 'a',
-            'nous' : 'avons',
-            'vous' : 'avez',
-            'ils/elles' : 'ont',
+            'nous'       : 'avons',
+            'vous'       : 'avez',
+            'ils/elles'  : 'ont',
         },
-        '\352tre':
+        '\352tre': // \352 = ê, so être
         {
-            'je' : 'suis',
-            'tu' : 'es',
+            'je'         : 'suis',
+            'tu'         : 'es',
             'il/elle/on' : 'est',
-            'nous' : 'sommes',
-            'vous' : '\352tes',
-            'ils/elles' : 'sont',
+            'nous'       : 'sommes',
+            'vous'       : '\352tes',
+            'ils/elles'  : 'sont',
         },
         'er': // these are only the endings
         {
-            'je' : 'e',
-            'tu' : 'es',
+            'je'         : 'e',
+            'tu'         : 'es',
             'il/elle/on' : 'e',
-            'nous' : 'ons',
-            'vous' : 'ez',
-            'ils/elles' : 'ent',
+            'nous'       : 'ons',
+            'vous'       : 'ez',
+            'ils/elles'  : 'ent',
         },
         're':
         {
-            'je' : 's',
-            'tu' : 's',
+            'je'         : 's',
+            'tu'         : 's',
             'il/elle/on' : '',
-            'nous' : 'ons',
-            'vous' : 'ez',
-            'ils/elles' : 'ent',
+            'nous'       : 'ons',
+            'vous'       : 'ez',
+            'ils/elles'  : 'ent',
         },
     };
 
