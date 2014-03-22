@@ -12,6 +12,6 @@ EASY ADDITIONS:
 
 -- a switch for the option of possibly not needing the subject (maybe even have both options acceptable by default)
 
--- make sure two consecutive randomized prompts are not the same
+-- make sure two consecutive randomized prompts are not the same [DONE]
 
 -- change the prompting algorithm so that all conjugations are statistically even [DONE]

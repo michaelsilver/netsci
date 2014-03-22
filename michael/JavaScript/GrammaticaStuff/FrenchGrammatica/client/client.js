@@ -13,6 +13,8 @@ function pickRandomFromArray(array){
 var pronouns =   ['je', 'tu', 'il/elle/on', 'nous', 'vous', 'ils/elles'];
 var typeOfPromptedVerb; // the type of verb prompted
 var typeOfPromptedPronoun;
+// var oldPronoun;
+// var oldVerb;
 // makes these webpage elements updatable
 exposeSessionVar(Template.main, 'userPronoun');
 exposeSessionVar(Template.main, 'userVerb');
@@ -31,15 +33,28 @@ function promptUser(){
 	Session.set('theActualAnswer', '');
 	Session.set('userCorrect', '');
 	// clears everything but the prompts
+
+	var promptedPronoun = pickPronoun();
+	var promptedVerb = pickVerb();
+	var oldPronoun;
+	var oldVerb;
+
+	if (promptedPronoun === oldPronoun && promptedVerb === oldVerb){
+		promptUser();
+	} else {
+		oldPronoun = promptedPronoun;
+		oldVerb = promptedVerb;
+	}
+
 	setPrompts(
-		pickPronoun(),
-		pickVerb()
+		promptedPronoun,
+		promptedVerb
 	);
 }
 
 function pickPronoun(){
 	typeOfPromptedPronoun = pickRandomFromArray(pronouns);
-	
+
 	if (typeOfPromptedPronoun == 'il/elle/on'){
 		return pickRandomFromArray(['il', 'elle', 'on']);
 	} else if (typeOfPromptedPronoun == 'ils/elles'){
