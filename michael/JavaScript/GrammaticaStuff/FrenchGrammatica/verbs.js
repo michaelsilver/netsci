@@ -35,19 +35,39 @@ verbs =
         ],
         're': //from https://conjuguemos.com
         [
-         'attendre',
-         'descendre',
-         'd\351fendre', // \351 = é, so défendre
-         'entendre',
-         'interrompre',
-         'perdre',
-         'rendre',
-         'rompre',
-         'r\351pondre', // \351 = é, so répondre
-         'vendre',
-         // verbs from conjuguemos end here
-         'lire'
+            'attendre',
+            'descendre',
+            'd\351fendre', // \351 = é, so défendre
+            'entendre',
+            'interrompre',
+            'perdre',
+            'rendre',
+            'rompre',
+            'r\351pondre', // \351 = é, so répondre
+            'vendre',
+            // verbs from conjuguemos end here
+            // 'lire' // Is this a -re verb????
+        ],
+        'ger': //from https://conjuguemos.com
+        [
+            'manger',
+            'changer',
+            'corriger',
+            'diriger',
+            'nager',
+            'obliger',
+            'voyager'
+        ],
+        'cer': //from https://conjuguemos.com
+        [
+            'commencer',
+            'annoncer',
+            'avancer',
+            'effacer',
+            'lancer',
+            'menacer',
+            'placer',
+            'prononcer',
+            'renoncer'
         ]
     };
-
-// console.log('&eacute');

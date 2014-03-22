@@ -36,6 +36,24 @@ verbConjugation =
             'vous'       : 'ez',
             'ils/elles'  : 'ent',
         },
+        'ger':
+        {
+            'je'         : 'ge',
+            'tu'         : 'ges',
+            'il/elle/on' : 'ge',
+            'nous'       : 'geons',
+            'vous'       : 'gez',
+            'ils/elles'  : 'gent',
+        },
+        'cer':
+        {
+            'je'         : 'ce',
+            'tu'         : 'ces',
+            'il/elle/on' : 'ce',
+            'nous'       : '\347ons', // \347 = ç, so çons
+            'vous'       : 'cez',
+            'ils/elles'  : 'cent',
+        }
     };
 
 // verbConjugation = _.chain(verbConjugation).value();
