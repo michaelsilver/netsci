@@ -39,7 +39,7 @@ function promptUser(){
 	var oldPronoun;
 	var oldVerb;
 
-	if (promptedPronoun === oldPronoun && promptedVerb === oldVerb){
+	if (promptedPronoun == oldPronoun && promptedVerb == oldVerb){
 		promptUser();
 	} else {
 		oldPronoun = promptedPronoun;
@@ -109,9 +109,9 @@ function correctAnswer(pronoun, verb){
 	var stem;
 	if (typeOfPromptedVerb == 'irregular'){
 		stem = '';
-	} else if (typeOfPromptedVerb == '\351AccentChangingEr' || typeOfPromptedVerb == 'eAccentChangingEr'){
+	} else if (typeOfPromptedVerb === '\351AccentChangingEr' || typeOfPromptedVerb === 'eAccentChangingEr'){
 		stem = verb.slice(0, verb.lastIndexOf('er'));
-		stem = changeEAccent(typeOfPromptedVerb, stem, pronoun);
+		stem = changeEAccent(typeOfPromptedVerb, stem, typeOfPromptedPronoun);
 		verb = 'er';
 	} else {
 		stem = verb.slice(0, verb.lastIndexOf(typeOfPromptedVerb));
@@ -119,38 +119,20 @@ function correctAnswer(pronoun, verb){
 	}
 
 	if (pronoun == 'je' && firstLetterIsVowel(getVerb())){
-		return "j'" + stem + verbConjugation[verb][pronoun];
-	} else if (pronoun == 'il' || pronoun == 'elle' || pronoun == 'on'){
-		return pronoun + ' ' + stem + verbConjugation[verb]['il/elle/on'];
-	} else if (pronoun == 'ils' || pronoun == 'elles'){
-		return pronoun + ' ' + stem + verbConjugation[verb]['ils/elles'];
-	} else return pronoun + ' ' + stem + verbConjugation[verb][pronoun];
+		return "j'" + stem + verbConjugation[verb][typeOfPromptedPronoun];
+	} else return pronoun + ' ' + stem + verbConjugation[verb][typeOfPromptedPronoun];
 }
 
 function changeEAccent(type, stem, pronoun){
-	return stem.replaceAt(stem.length-2, verbConjugation[type][pronoun]);
+	return replaceCharAt(stem.length-2, stem, verbConjugation[type][pronoun]);
 }
 
 // UTILITIES:
-
-// function endsWith(base, ending){
-//     if(base.length >= ending.length){
-//         return base.lastIndexOf(ending) == base.length - ending.length;
-//     }else{
-//         return false;
-//     }
-// }
 
 function firstLetterIsVowel(word){
 	return (/[aeiou]/).test(word.charAt(0));
 }
 
-// function replaceAt(string, index, character){
-// return string.substr(0, index) + character + string.substr(index+character.length);
-// }
-
-
-//found online - wondering about "prototype" 
-String.prototype.replaceAt=function(index, character){
-	return this.substr(0, index) + character + this.substr(index+character.length);
-};
+function replaceCharAt(index, str, character){
+	return str.substr(0, index) + character + str.substr(index + 1);
+}

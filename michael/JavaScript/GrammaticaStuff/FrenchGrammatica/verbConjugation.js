@@ -59,7 +59,7 @@ verbConjugation =
             'je'         : '\350', // è
             'tu'         : '\350', // è
             'il/elle/on' : '\350', // è
-            'nous'       : '\351', // é // QUESTION: can value be function?
+            'nous'       : '\351', // é
             'vous'       : '\351', // é
             'ils/elles'  : '\350', // è
         },
