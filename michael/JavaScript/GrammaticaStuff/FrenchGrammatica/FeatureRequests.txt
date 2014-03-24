@@ -15,3 +15,7 @@ EASY ADDITIONS:
 -- make sure two consecutive randomized prompts are not the same [DONE]
 
 -- change the prompting algorithm so that all conjugations are statistically even [DONE]
+
+NOTE:
+
+<select>

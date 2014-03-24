@@ -69,5 +69,19 @@ verbs =
             'placer',
             'prononcer',
             'renoncer'
+        ],
+        '\351AccentChangingEr':
+        [
+            'pr\351f\351re', // préfére
+            'esp\351rer', // espérer
+            'r\351p\351ter' // répéter
+        ],
+        'eAccentChangingEr':
+        [
+            'acheter',
+            'amener',
+            'emmener',
+            'lever',
+            'promener'
         ]
     };

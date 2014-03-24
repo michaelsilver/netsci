@@ -74,7 +74,7 @@ Meteor.startup(function(){
 });
 
 Template.main.events({
-	'click #enter':function(){
+	'click #submit':function(){
 		handleSubmit();
 	},
 	'keypress input': function (evt) {
@@ -109,6 +109,10 @@ function correctAnswer(pronoun, verb){
 	var stem;
 	if (typeOfPromptedVerb == 'irregular'){
 		stem = '';
+	} else if (typeOfPromptedVerb == '\351AccentChangingEr' || typeOfPromptedVerb == 'eAccentChangingEr'){
+		stem = verb.slice(0, verb.lastIndexOf('er'));
+		stem = changeEAccent(typeOfPromptedVerb, stem, pronoun);
+		verb = 'er';
 	} else {
 		stem = verb.slice(0, verb.lastIndexOf(typeOfPromptedVerb));
 		verb = typeOfPromptedVerb;
@@ -121,6 +125,10 @@ function correctAnswer(pronoun, verb){
 	} else if (pronoun == 'ils' || pronoun == 'elles'){
 		return pronoun + ' ' + stem + verbConjugation[verb]['ils/elles'];
 	} else return pronoun + ' ' + stem + verbConjugation[verb][pronoun];
+}
+
+function changeEAccent(type, stem, pronoun){
+	return stem.replaceAt(stem.length-2, verbConjugation[type][pronoun]);
 }
 
 // UTILITIES:
@@ -136,3 +144,13 @@ function correctAnswer(pronoun, verb){
 function firstLetterIsVowel(word){
 	return (/[aeiou]/).test(word.charAt(0));
 }
+
+// function replaceAt(string, index, character){
+// return string.substr(0, index) + character + string.substr(index+character.length);
+// }
+
+
+//found online - wondering about "prototype" 
+String.prototype.replaceAt=function(index, character){
+	return this.substr(0, index) + character + this.substr(index+character.length);
+};
