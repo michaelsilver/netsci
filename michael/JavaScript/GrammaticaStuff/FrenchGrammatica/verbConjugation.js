@@ -18,6 +18,33 @@ verbConjugation =
             'vous'       : '\352tes', // \352 = ê, so êtes 
             'ils/elles'  : 'sont',
         },
+        'faire':
+        {
+            'je'         : 'fais',
+            'tu'         : 'fais',
+            'il/elle/on' : 'fait',
+            'nous'       : 'faisons',
+            'vous'       : 'faites',
+            'ils/elles'  : 'font',
+        },
+        'aller':
+        {
+            'je'         : 'vais',
+            'tu'         : 'vas',
+            'il/elle/on' : 'va',
+            'nous'       : 'allons',
+            'vous'       : 'allez',
+            'ils/elles'  : 'vont',
+        },
+        'venir':
+        {
+            'je'         : 'viens',
+            'tu'         : 'viens',
+            'il/elle/on' : 'vient',
+            'nous'       : 'venons',
+            'vous'       : 'venez',
+            'ils/elles'  : 'viennent',
+        },
         'er': // these are only the endings
         {
             'je'         : 'e',
@@ -35,6 +62,15 @@ verbConjugation =
             'nous'       : 'ons',
             'vous'       : 'ez',
             'ils/elles'  : 'ent',
+        },
+        'ir':
+        {
+            'je'         : 'is',
+            'tu'         : 'is',
+            'il/elle/on' : 'it',
+            'nous'       : 'issons',
+            'vous'       : 'issez',
+            'ils/elles'  : 'issent',
         },
         'ger': // these are only the endings
         {

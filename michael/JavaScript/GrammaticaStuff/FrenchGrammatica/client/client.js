@@ -39,7 +39,9 @@ function promptUser(){
 	var oldPronoun;
 	var oldVerb;
 
-	if (promptedPronoun == oldPronoun && promptedVerb == oldVerb){
+	console.log(oldPronoun + ' ' + oldVerb);
+
+	if (promptedPronoun === oldPronoun && promptedVerb === oldVerb){
 		promptUser();
 	} else {
 		oldPronoun = promptedPronoun;
@@ -118,7 +120,7 @@ function correctAnswer(pronoun, verb){
 		verb = typeOfPromptedVerb;
 	}
 
-	if (pronoun == 'je' && firstLetterIsVowel(getVerb())){
+	if (pronoun == 'je' && firstLetterIsVowel(stem + verbConjugation[verb][typeOfPromptedPronoun])){
 		return "j'" + stem + verbConjugation[verb][typeOfPromptedPronoun];
 	} else return pronoun + ' ' + stem + verbConjugation[verb][typeOfPromptedPronoun];
 }

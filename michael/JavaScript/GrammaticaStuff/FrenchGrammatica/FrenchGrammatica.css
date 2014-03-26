@@ -36,3 +36,8 @@ input:focus{
 	margin-top:24px;
 	text-align: center;
 }
+#notice{
+	position: absolute;
+	top: 490px;
+	bottom: 0px;
+}
