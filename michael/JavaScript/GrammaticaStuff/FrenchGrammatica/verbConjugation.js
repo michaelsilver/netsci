@@ -45,6 +45,33 @@ verbConjugation =
             'vous'       : 'venez',
             'ils/elles'  : 'viennent',
         },
+        'voir':
+        {
+            'je'         : 'vois',
+            'tu'         : 'vois',
+            'il/elle/on' : 'voit',
+            'nous'       : 'voyons',
+            'vous'       : 'voyez',
+            'ils/elles'  : 'voient',
+        },
+        'savoir':
+        {
+            'je'         : 'sais',
+            'tu'         : 'sais',
+            'il/elle/on' : 'sait',
+            'nous'       : 'savons',
+            'vous'       : 'savez',
+            'ils/elles'  : 'savent',
+        },
+        'conna\356tre':
+        {
+            'je'         : 'connais',
+            'tu'         : 'connais',
+            'il/elle/on' : 'conna\356t',
+            'nous'       : 'connaissons',
+            'vous'       : 'connaissez',
+            'ils/elles'  : 'connaissent',
+        },
         'er': // these are only the endings
         {
             'je'         : 'e',
@@ -109,15 +136,3 @@ verbConjugation =
             'ils/elles'  : '\350', // è
         }
     };
-
-// verbConjugation = _.chain(verbConjugation).value();
-// console.log(_.keys(verbConjugation).verb.value().keys().pronoun));
-// console.log(_.keys(verbConjugation.value()));
-// console.log(verbConjugation.avoir.tu); // this one is fine
-
-// BUT: look at line 53 of client.js
-
-
-// function verbConjugation(){
-//     return verbConjugation;
-// }

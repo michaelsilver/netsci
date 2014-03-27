@@ -39,7 +39,7 @@ function promptUser(){
 	var oldPronoun;
 	var oldVerb;
 
-	console.log(oldPronoun + ' ' + oldVerb);
+	// console.log(oldPronoun + ' ' + oldVerb);
 
 	if (promptedPronoun === oldPronoun && promptedVerb === oldVerb){
 		promptUser();

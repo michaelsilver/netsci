@@ -6,7 +6,10 @@ verbs =
          '\352tre', // \352 = ê, so être
          'faire',
          'aller',
-         'venir'
+         'venir',
+         'voir',
+         'savoir',
+         'conna\356tre' // \356 = î, so connaître
         ],
         'er': //from https://conjuguemos.com
         [
