@@ -73,9 +73,10 @@ function pickVerb(){ // eventually accept choices
 
 	return pickRandomFromArray(verbs);
 }
-
 Meteor.startup(function(){
-	promptUser();
+	Deps.autorun(function(){
+		promptUser();
+	});
 });
 
 Template.main.helpers({

@@ -121,6 +121,5 @@ if (VerbTypes.find().count() === 0) {
 			'type': type,
 			'verbs': verbsByType
 		});
-
 	});
 }

@@ -1,3 +1,4 @@
 .metadata/
 *.log
 *.DS_Store
+.meteor/
