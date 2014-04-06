@@ -1,0 +1,1 @@
+VerbTypes = new Meteor.Collection('verbtypes');

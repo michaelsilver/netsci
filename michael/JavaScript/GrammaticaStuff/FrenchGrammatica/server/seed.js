@@ -114,3 +114,13 @@ verbs =
             'promener'
         ]
     };
+
+if (VerbTypes.find().count() === 0) {
+	_.each(verbs, function(verbsByType, type) {
+		VerbTypes.insert({
+			'type': type,
+			'verbs': verbsByType
+		});
+
+	});
+}

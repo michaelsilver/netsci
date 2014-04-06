@@ -3,7 +3,18 @@
 </head>
 
 <body>
-  {{> main}}
+	<div id="wrap">
+		<div id="header"></div>
+		<div id="nav"></div>
+		<div id="main">
+			{{> main}}
+		</div>
+		<div id="sidebar">
+			{{> menu}}
+		</div>
+	</div>
+	
+  
 </body>
 
 <template name="main">
@@ -16,11 +27,17 @@
 		<p>{{userCorrect}}</p>
 		<p><b>{{theActualAnswer}}</b></p>
 		<p id="notice"><u>Instructions:</u><br>When prompted, enter the pronoun and conjugated verb.<br>If correct, you will be re-prompted.<br>If incorrect, you must correct yourself to proceed.<br><br>Beta Site: Still Under Development!<br>Created by Michael Silver</p>
-		<!-- <select multiple="multiple">
-			<option value="all" selected="selected">all</option>
-			<option value="avoir">avoir</option>
-			<option value="\352tre">&ecirctre</option>
-		</select> -->
+		
 		<!-- See http://stackoverflow.com/questions/170986/what-is-the-best-way-to-add-options-to-a-select-from-an-array-with-jquery -->
+	</div>
+</template>
+
+<template name="menu">
+	<div class="menu-wrapper">
+		<ul>
+			{{#each verbtypes}}
+				<li>{{type}}</li>
+			{{/each}}
+		</ul>
 	</div>
 </template>

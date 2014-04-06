@@ -23,10 +23,6 @@ exposeSessionVar(Template.main, 'theActualAnswer');
 
 
 // on webpage load, show a random case, number, and noun
-function setPrompts(pronoun, verb){
-	Session.set('userPronoun', pronoun);
-	Session.set('userVerb', verb);
-}
 
 function promptUser(){
 	$('#userInput').val('');
@@ -36,22 +32,28 @@ function promptUser(){
 
 	var promptedPronoun = pickPronoun();
 	var promptedVerb = pickVerb();
-	var oldPronoun;
-	var oldVerb;
 
-	// console.log(oldPronoun + ' ' + oldVerb);
+	// console.log(getVerb());
+	// console.log(getPronoun());
+	// console.log(promptedVerb);
+	// console.log(promptedPronoun);
+	// console.log("--------");
 
-	if (promptedPronoun === oldPronoun && promptedVerb === oldVerb){
-		promptUser();
-	} else {
-		oldPronoun = promptedPronoun;
-		oldVerb = promptedVerb;
+	while (promptedPronoun === getPronoun() && promptedVerb === getVerb()){
+		promptedPronoun = pickPronoun();
+		promptedVerb = pickVerb();
+		// console.log("I fixed myself!");
 	}
 
 	setPrompts(
 		promptedPronoun,
 		promptedVerb
 	);
+}
+
+function setPrompts(pronoun, verb){
+	Session.set('userPronoun', pronoun);
+	Session.set('userVerb', verb);
 }
 
 function pickPronoun(){
@@ -65,14 +67,27 @@ function pickPronoun(){
 }
 
 function pickVerb(){ // eventually accept choices
-	var verbTypes = _.keys(verbs);
-	typeOfPromptedVerb = pickRandomFromArray(verbTypes);
+	var verbTypes = VerbTypes.find().count();
+	console.log(verbTypes);
+	typeOfPromptedVerb = pickRandomFromArray(_.toArray(VerbTypes.find({'type': typeOfPromptedVerb})));
 
-	return pickRandomFromArray(verbs[typeOfPromptedVerb]);
+	return pickRandomFromArray(verbs);
 }
 
 Meteor.startup(function(){
 	promptUser();
+});
+
+Template.main.helpers({
+	verbtypes: function(){
+		return VerbTypes.find();
+	}
+});
+
+Template.menu.helpers({
+	verbtypes: function(){
+		return VerbTypes.find();
+	}
 });
 
 Template.main.events({
@@ -88,10 +103,11 @@ Template.main.events({
 });
 
 function getPronoun(){
-	return Session.get('userPronoun').toLowerCase();
+	return (Session.get('userPronoun')) ? Session.get('userPronoun').toLowerCase() : undefined;
 }
+
 function getVerb(){
-	return Session.get('userVerb').toLowerCase();
+	return (Session.get('userVerb')) ? Session.get('userVerb').toLowerCase() : undefined;
 }
 
 function handleSubmit(){
