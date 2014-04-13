@@ -23,6 +23,10 @@ exposeSessionVar(Template.main, 'theActualAnswer');
 // on webpage load, show a random case, number, and noun
 
 function promptUser(){
+	if(Verbs.find().count() === 0){
+		window.setTimeout(promptUser, 100);
+		return;
+	}
 	$('#userInput').val('');
 	Session.set('theActualAnswer', '');
 	Session.set('userCorrect', '');
@@ -64,30 +68,29 @@ function pickPronoun(){
 	} else return typeOfPromptedPronoun;
 }
 
-function pickVerb(){ // eventually accept choices
-	var verbTypes = VerbTypes.find().count();
-	console.log(verbTypes);
-	typeOfPromptedVerb = pickRandomFromArray(_.toArray(VerbTypes.find({'type': typeOfPromptedVerb})));
-
-	return pickRandomFromArray(verbs);
+function verbTypes(){
+	if(Verbs.find().count() == 0){
+		return [];
+	}else{
+		return _.uniq(_.pluck(Verbs.find().fetch(), 'type'));
+	}
 }
-Meteor.startup(function(){
-	Deps.autorun(function(){
-		// console.log('Hello');
-		promptUser();
-	});
-});
 
 Template.main.helpers({
-	verbtypes: function(){
-		return VerbTypes.find();
-	}
+	verbtypes: verbTypes
 });
 
 Template.menu.helpers({
-	verbtypes: function(){
-		return VerbTypes.find();
-	}
+	verbtypes: verbTypes
+});
+
+function pickVerb(){ // eventually accept choices
+	var typeOfPromptedVerb = pickRandomFromArray(verbTypes());
+	var verbsOfType = _.where(Verbs.find().fetch(),{type:typeOfPromptedVerb});
+	return pickRandomFromArray(_.pluck(verbsOfType,'verb'));
+}
+Meteor.startup(function(){
+	promptUser();
 });
 
 Template.main.events({
