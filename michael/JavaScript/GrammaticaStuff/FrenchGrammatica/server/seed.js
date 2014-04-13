@@ -1,4 +1,4 @@
-verbs =
+verbsByType =
     {
         'irregular':
         [
@@ -113,11 +113,13 @@ verbs =
         ]
     };
 
-if (VerbTypes.find().count() === 0) {
-	_.each(verbs, function(verbsByType, type) {
-		VerbTypes.insert({
-			'type': type,
-			'verbs': verbsByType
-		});
+if (Verbs.find().count() === 0) {
+	_.each(verbsByType, function(verbs, type) {
+        _.each(verbs, function(verb){
+            Verbs.insert({
+                'type': type,
+                'verb': verb
+            });
+        });
 	});
 }

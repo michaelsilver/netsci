@@ -1,1 +1,1 @@
-VerbTypes = new Meteor.Collection('verbtypes');
+Verbs = new Meteor.Collection('verbs2');

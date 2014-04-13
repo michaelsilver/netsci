@@ -11,22 +11,21 @@ h1{
 }
 
 #wrap{
-	width:960px;
+	width:550px;
 	margin: 0 auto;
+	overflow:auto;
 }
 #main{
 	float: right;
-	width: 500px;
-	margin-left: 0px;
+	width: 400px;
 }
 #sidebar{
 	float: left;
-	width: 200px;
-	margin-right: 0px;
+	width: 150px;
 }
 
 input{
-	width:400px;
+	width:calc(400px - 28px);
 	font-size:130%;
 	padding:12px;
 	border: 1px solid #f8f8f8;
@@ -45,11 +44,6 @@ select{
 select:focus{
 	outline:none;
 	border: 1px solid #66323d;
-}
-#VTypeSelector{
-	position: absolute;
-	top: 150px;
-	left: 350px;
 }
 #submit{
 	display:block;

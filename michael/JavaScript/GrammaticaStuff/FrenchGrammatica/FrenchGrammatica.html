@@ -4,21 +4,17 @@
 
 <body>
 	<div id="wrap">
-		<div id="header"></div>
-		<div id="nav"></div>
-		<div id="main">
-			{{> main}}
-		</div>
+		<h1>French Grammatica</h1>
 		<div id="sidebar">
 			{{> menu}}
 		</div>
+		<div id="main">
+			{{> main}}
+		</div>
 	</div>
-	
-  
 </body>
 
 <template name="main">
-	<h1>French Grammatica</h1>
 	<div id="content">
 		<h3 id="pronoun">{{userPronoun}}</h3>
 		<h3 id="verb">{{userVerb}}</h3>
@@ -36,7 +32,7 @@
 	<div class="menu-wrapper">
 		<select id="VTypeSelector" size="8" multiple="multiple">
 			{{#each verbtypes}}
-				<option value="{{type}}">{{type}}</option>
+				<option value="{{this}}">{{this}}</option>
 			{{/each}}
 		</select>
 	</div>
