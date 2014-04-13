@@ -13,8 +13,6 @@ function pickRandomFromArray(array){
 var pronouns =   ['je', 'tu', 'il/elle/on', 'nous', 'vous', 'ils/elles'];
 var typeOfPromptedVerb; // the type of verb prompted
 var typeOfPromptedPronoun;
-// var oldPronoun;
-// var oldVerb;
 // makes these webpage elements updatable
 exposeSessionVar(Template.main, 'userPronoun');
 exposeSessionVar(Template.main, 'userVerb');

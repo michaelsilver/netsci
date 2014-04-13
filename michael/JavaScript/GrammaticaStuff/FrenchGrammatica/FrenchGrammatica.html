@@ -34,10 +34,10 @@
 
 <template name="menu">
 	<div class="menu-wrapper">
-		<ul>
+		<select multiple="multiple">
 			{{#each verbtypes}}
-				<li>{{type}}</li>
+				<option value="{{type}}">{{type}}</option>
 			{{/each}}
-		</ul>
+		</select>
 	</div>
 </template>

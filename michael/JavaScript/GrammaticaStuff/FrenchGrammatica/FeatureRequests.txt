@@ -16,6 +16,3 @@ EASY ADDITIONS:
 
 -- change the prompting algorithm so that all conjugations are statistically even [DONE]
 
-NOTE:
-
-<select>
