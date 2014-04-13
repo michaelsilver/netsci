@@ -73,6 +73,7 @@ function pickVerb(){ // eventually accept choices
 }
 Meteor.startup(function(){
 	Deps.autorun(function(){
+		// console.log('Hello');
 		promptUser();
 	});
 });

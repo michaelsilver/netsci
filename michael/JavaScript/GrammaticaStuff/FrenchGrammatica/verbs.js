@@ -1,5 +1,3 @@
-
-
 verbs =
     {
         'irregular':
