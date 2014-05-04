@@ -11,17 +11,17 @@ h1{
 }
 
 #wrap{
-	width:550px;
+	width: calc(390px + 160px + 25px);
 	margin: 0 auto;
-	overflow:auto;
+	/*overflow:auto;*/
 }
 #main{
 	float: right;
-	width: 400px;
+	width: 390px;
 }
 #sidebar{
 	float: left;
-	width: 150px;
+	width: 160px;
 }
 
 input{
@@ -39,11 +39,21 @@ input:focus{
 select{
 	padding:8px;
 	border: 1px solid #f8f8f8;
+	margin-top: 10px;
+	margin-right: 20px;
 	background-color:#f8f8f8;
 }
 select:focus{
 	outline:none;
 	border: 1px solid #66323d;
+}
+.menu-wrapper{
+	margin-top: 30px;
+	/*padding-right: px;*/
+	/*border-right: 1px solid black;*/
+}
+#verbTypesTitle{
+	padding-left: 2px;
 }
 #submit{
 	display:block;
@@ -58,7 +68,9 @@ select:focus{
 }
 #notice{
 	position: absolute;
-	top: 490px;
+	top: 500px;
 	bottom: 0px;
+	padding-left: 25px;
+	/*box-align:center;*/
 }
 

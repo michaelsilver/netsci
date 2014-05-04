@@ -11,6 +11,9 @@
 		<div id="main">
 			{{> main}}
 		</div>
+		<div>
+			{{> instructions}}
+		</div>
 	</div>
 </body>
 
@@ -22,18 +25,22 @@
 		<a id="submit">Submit</a>
 		<p>{{userCorrect}}</p>
 		<p><b>{{theActualAnswer}}</b></p>
-		<p id="notice"><u>Instructions:</u><br>When prompted, enter the pronoun and conjugated verb.<br>If correct, you will be re-prompted.<br>If incorrect, you must correct yourself to proceed.<br><br>Beta Site: Still Under Development!<br>Created by Michael Silver</p>
-		
 		<!-- See http://stackoverflow.com/questions/170986/what-is-the-best-way-to-add-options-to-a-select-from-an-array-with-jquery -->
 	</div>
 </template>
 
 <template name="menu">
 	<div class="menu-wrapper">
-		<select id="VTypeSelector" size="8" multiple="multiple">
-			{{#each verbtypes}}
-				<option value="{{this}}">{{this}}</option>
-			{{/each}}
-		</select>
+		<label id="verbTypesTitle">Verb Type(s):<br>
+			<select id="VTypeSelector" size="8" multiple="multiple">
+				{{#each verbtypes}}
+					<option value="{{this}}">{{this}}</option>
+				{{/each}}
+			</select>
+		</label>
 	</div>
+</template>
+
+<template name="instructions">
+	<p id="notice"><u>Instructions:</u><br>When prompted, enter the pronoun and conjugated verb.<br>If correct, you will be re-prompted.<br>If incorrect, you must correct yourself to proceed.<br><br>Beta Site: Still Under Development!<br>Created by Michael Silver</p>
 </template>
