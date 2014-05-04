@@ -9,7 +9,6 @@ h1{
 	text-align:center;
 	color: #66323d;
 }
-
 #wrap{
 	width: calc(390px + 160px + 25px);
 	margin: 0 auto;
@@ -23,7 +22,6 @@ h1{
 	float: left;
 	width: 160px;
 }
-
 input{
 	width:calc(400px - 28px);
 	font-size:130%;
@@ -68,7 +66,7 @@ select:focus{
 }
 #notice{
 	position: absolute;
-	top: 500px;
+	top: 520px;
 	bottom: 0px;
 	padding-left: 25px;
 	/*box-align:center;*/

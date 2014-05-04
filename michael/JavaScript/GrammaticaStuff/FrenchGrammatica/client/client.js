@@ -11,8 +11,15 @@ function pickRandomFromArray(array){
 }
 
 var pronouns =   ['je', 'tu', 'il/elle/on', 'nous', 'vous', 'ils/elles'];
-var typeOfPromptedVerb; // the type of verb prompted
-var typeOfPromptedPronoun;
+function getTypeOfPronoun(pronoun){
+	var ret;
+	_.each(pronouns, function(candidate){
+		if(_.contains(candidate.split(/\//g), pronoun)){
+			ret = candidate;
+		}
+	});
+	return ret;
+}
 // makes these webpage elements updatable
 exposeSessionVar(Template.main, 'userPronoun');
 exposeSessionVar(Template.main, 'userVerb');
@@ -35,12 +42,6 @@ function promptUser(){
 	var promptedPronoun = pickPronoun();
 	var promptedVerb = pickVerb();
 
-	// console.log(getVerb());
-	// console.log(getPronoun());
-	// console.log(promptedVerb);
-	// console.log(promptedPronoun);
-	// console.log("--------");
-
 	while (promptedPronoun === getPronoun() && promptedVerb === getVerb()){
 		promptedPronoun = pickPronoun();
 		promptedVerb = pickVerb();
@@ -59,13 +60,9 @@ function setPrompts(pronoun, verb){
 }
 
 function pickPronoun(){
-	typeOfPromptedPronoun = pickRandomFromArray(pronouns);
-
-	if (typeOfPromptedPronoun == 'il/elle/on'){
-		return pickRandomFromArray(['il', 'elle', 'on']);
-	} else if (typeOfPromptedPronoun == 'ils/elles'){
-		return pickRandomFromArray(['ils', 'elles']);
-	} else return typeOfPromptedPronoun;
+	var pickedPronouns = pickRandomFromArray(pronouns);
+	pickedPronouns = pickedPronouns.split(/\//g);
+	return pickRandomFromArray(pickedPronouns);
 }
 
 function verbTypes(){
@@ -87,7 +84,10 @@ Template.menu.helpers({
 function pickVerb(){ // eventually accept choices
 	var typeOfPromptedVerb = pickRandomFromArray(verbTypes());
 	var verbsOfType = _.where(Verbs.find().fetch(),{type:typeOfPromptedVerb});
-	return pickRandomFromArray(_.pluck(verbsOfType,'verb'));
+	return {
+		verb:pickRandomFromArray(_.pluck(verbsOfType,'verb')),
+		type:typeOfPromptedVerb
+	};
 }
 Meteor.startup(function(){
 	promptUser();
@@ -106,11 +106,21 @@ Template.main.events({
 });
 
 function getPronoun(){
-	return (Session.get('userPronoun')) ? Session.get('userPronoun').toLowerCase() : undefined;
+	if(Session.get('userPronoun')){
+		return Session.get('userPronoun').toLowerCase();
+	} else {
+		return undefined;
+	}
 }
 
 function getVerb(){
-	return (Session.get('userVerb')) ? Session.get('userVerb').toLowerCase() : undefined;
+	if(Session.get('userVerb')){
+		var ret = Session.get('userVerb');
+		ret.verb = ret.verb.toLowerCase();
+		return ret;
+	}else{
+		return undefined;
+	}
 }
 
 function handleSubmit(){
@@ -128,20 +138,22 @@ function handleSubmit(){
 
 function correctAnswer(pronoun, verb){
 	var stem;
-	if (typeOfPromptedVerb == 'irregular'){
+	var typeOfPromptedPronoun = getTypeOfPronoun(pronoun);
+	// Check this logic:
+	if (verb.type == 'irregular'){
 		stem = '';
-	} else if (typeOfPromptedVerb === '\351AccentChangingEr' || typeOfPromptedVerb === 'eAccentChangingEr'){
-		stem = verb.slice(0, verb.lastIndexOf('er'));
-		stem = changeEAccent(typeOfPromptedVerb, stem, typeOfPromptedPronoun);
-		verb = 'er';
+	} else if (verb.type === '\351AccentChangingEr' || verb.type === 'eAccentChangingEr'){
+		stem = verb.verb.slice(0, verb.verb.lastIndexOf('er'));
+		stem = changeEAccent(verb.type, stem, typeOfPromptedPronoun);
+		verb.verb = 'er';
 	} else {
-		stem = verb.slice(0, verb.lastIndexOf(typeOfPromptedVerb));
-		verb = typeOfPromptedVerb;
+		stem = verb.verb.slice(0, verb.verb.lastIndexOf(verb.type));
+		verb.verb = verb.type;
 	}
-
-	if (pronoun == 'je' && firstLetterIsVowel(stem + verbConjugation[verb][typeOfPromptedPronoun])){
-		return "j'" + stem + verbConjugation[verb][typeOfPromptedPronoun];
-	} else return pronoun + ' ' + stem + verbConjugation[verb][typeOfPromptedPronoun];
+	// Stop checking here.
+	if (pronoun == 'je' && firstLetterIsVowel(stem + verbConjugation[verb.verb][typeOfPromptedPronoun])){
+		return "j'" + stem + verbConjugation[verb.verb][typeOfPromptedPronoun];
+	} else return pronoun + ' ' + stem + verbConjugation[verb.verb][typeOfPromptedPronoun];
 }
 
 function changeEAccent(type, stem, pronoun){
