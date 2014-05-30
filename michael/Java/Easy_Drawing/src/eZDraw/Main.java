@@ -24,7 +24,7 @@ public class Main extends PApplet {
 			circleShape;
 	Draw freeDraw, easingDraw;
 	MenuItem redBlueBox, greenStripe;
-	private boolean menuchanged = true;
+//	private boolean menuchanged = true;
 
 	/**
 	 * 
@@ -98,6 +98,7 @@ public class Main extends PApplet {
 		drawCanvas();
 		drawOutlining(); // just once?
 		// DRAWING
+		noFill();
 		pointShape.drawPoint();
 		lineShape.drawLine();
 		rectShape.drawRect();
@@ -107,13 +108,13 @@ public class Main extends PApplet {
 		freeDraw.drawLine();
 		easingDraw.drawLine();
 		// MENU ITEMS
-		if (menuchanged ) {
-			redBlueBox.drawRedBlueBox();
-			greenStripe.drawGreenStripe();
-			redBlueBox.drawYellowPoint();
-			greenStripe.drawYellowLine();
-			drawSampleColorBox();
-		}
+//		if (menuchanged ) {
+//			redBlueBox.drawRedBlueBox();
+//			greenStripe.drawGreenStripe();
+//			redBlueBox.drawYellowPoint();
+//			greenStripe.drawYellowLine();
+//			drawSampleColorBox();
+//		}
 	}
 
 	public void mouseClicked() {// called by processing on mouse click
